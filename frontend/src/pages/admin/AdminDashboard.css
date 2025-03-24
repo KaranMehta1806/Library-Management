@@ -1,0 +1,33 @@
+/* Sidebar Styling */
+.sidebar {
+    height: 100vh;
+    position: fixed;
+  }
+  
+  .nav-link {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    text-align: left;
+    border-radius: 5px;
+  }
+  
+  .nav-link:hover {
+    background-color: #495057;
+  }
+  
+  /* Card Styling */
+  .card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Progress Bar */
+  .progress {
+    height: 20px;
+    border-radius: 5px;
+  }
+  
