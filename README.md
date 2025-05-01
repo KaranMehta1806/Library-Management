@@ -37,6 +37,13 @@ Access the deployed application: [Live Demo](https://library-management-app-kara
 - 📊 System analytics dashboard
 - 📜 Activity logs monitoring
 
+🚀 Tech Stack
+Frontend: React.js, React Bootstrap, Material-UI
+Backend: Node.js, Express.js
+Database: MongoDB
+Authentication: JWT (JSON Web Tokens)
+Email Service: Nodemailer for OTP-based password reset functionality
+
 ## 🛠️ Technology Stack
 
 **Frontend**
