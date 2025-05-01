@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Server_URL } from "../../../utils/config";
 import { useNavigate, useLocation } from "react-router-dom";
-import "./VerifyOTP.css"; // Create this CSS file
+import "./VerifyOtp.css";
 
 function VerifyOTP() {
   const { 
