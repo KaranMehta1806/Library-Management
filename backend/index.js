@@ -10,7 +10,7 @@ const librarian = require("./routes/librarian.js")
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://library-management-murex-gamma.vercel.app"
+  "library-management-app-karan.vercel.app"
 ];
 
 app.use(express.json()); // Parse JSON
