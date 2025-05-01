@@ -16,7 +16,7 @@ const AdminLogin = () => {
 
   const onSubmit = async (data) => {
         try {
-                const url =Server_URL + 'admin/login';
+          const url =Server_URL + 'admin/login';
           const response = await axios.post(url, data);
           console.log("Response:", response.data);
           alert("Login Successful!");

@@ -12,4 +12,101 @@
     background-color: #007bff;
     color: white;
   }
-  
+
+/* Book Card */
+.book-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+  height: 100%;
+  border: 1px solid #ddd;
+}
+
+.book-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+}
+
+/* Book Image */
+.book-img-container {
+  width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 3px solid #007bff;
+}
+
+.book-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Book Details */
+.book-details {
+  padding: 15px;
+}
+
+.book-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.book-author {
+  font-size: 14px;
+  color: #555;
+  font-style: italic;
+}
+
+.book-category {
+  font-size: 14px;
+  color: #007bff;
+  font-weight: 600;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.details-btn, .issue-btn {
+  border: none;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  flex: 1;
+  transition: 0.3s ease-in-out;
+}
+
+.details-btn {
+  background: #007bff;
+  color: white;
+}
+
+.details-btn:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+.issue-btn {
+  background: #28a745;
+  color: white;
+}
+
+.issue-btn:hover {
+  background: #1e7e34;
+  transform: scale(1.05);
+}

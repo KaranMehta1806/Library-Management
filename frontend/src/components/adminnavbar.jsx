@@ -4,11 +4,13 @@ import "./adminnavbar.css"
 export default function AdminNavbar(){
 
     const [menuOpen, setMenuOpen] = useState(false);
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("authToken");
+  const role = localStorage.getItem("role");
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("role");
     navigate("/login");
   };
 
@@ -49,23 +51,36 @@ export default function AdminNavbar(){
   </Link>
   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
     <li>
-      <Link className="dropdown-item" to="/books/add">Add Book</Link>
+      <Link className="dropdown-item" to="/admin/addbook">Add Book</Link>
     </li>
     <li>
-      <Link className="dropdown-item" to="/books/view">View Books</Link>
+      <Link className="dropdown-item" to="/admin/viewbook">View Books</Link>
     </li>
   </ul>
 </li>
 
+{role == "librarian"?<li className="nav-item">
+            <Link className="nav-link" to="/admin/issuerequest">Issue Request</Link>
+          </li> :null}
 
-          <li className="nav-item">
-            <Link className="nav-link" to="/about">About</Link>
-          </li>
+          {role == "librarian"?<li className="nav-item">
+            <Link className="nav-link" to="/admin/returnrequest">Return Request</Link>
+          </li> :null}
+
+          {role == "librarian"?<li className="nav-item">
+            <Link className="nav-link" to="/admin/issued">Books Borrowed</Link>
+          </li> :null}
+
+          {role == "admin"?<li className="nav-item">
+            <Link className="nav-link" to="/admin/addlibrarian">Add Librarian</Link>
+          </li> :null}
         </ul>
 
         {/* Right Section */}
         <ul className="navbar-nav">
           {token ? (
+            
+
             <li className="nav-item dropdown">
               <button
                 className="btn btn-light dropdown-toggle"
@@ -76,7 +91,7 @@ export default function AdminNavbar(){
               </button>
               <ul className="dropdown-menu dropdown-menu-end">
                 <li>
-                  <Link className="dropdown-item" to="/dashboard">Dashboard</Link>
+                  <Link className="dropdown-item" to="/admin">Dashboard</Link>
                 </li>
                 <li><hr className="dropdown-divider" /></li>
                 <li>
@@ -89,7 +104,7 @@ export default function AdminNavbar(){
           ) : (
             <>
               <li className="nav-item">
-                <Link className="btn btn-light me-2" to="/login">Login</Link>
+                <Link className="btn btn-light me-2" to="/admin-login">Login</Link>
               </li>
             </>
           )}

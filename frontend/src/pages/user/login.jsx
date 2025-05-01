@@ -2,51 +2,70 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./login.css"; // Custom styling
 
-export default function Login(){
+export default function Login() {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    let navigate = useNavigate()
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post("http://localhost:5000/users/login", data);
+      const { role, token } = response.data.user;
 
-    const onSubmit = async (data) => {
-      try {
-        const response = await axios.post("http://localhost:5000/users/login", data);
-        console.log("Response:", response.data);
-        alert("Login Successful!");
-        navigate("/")
-        
-        // Store token in localStorage or sessionStorage
-        localStorage.setItem("authToken", response.data.token);
-        
+      localStorage.setItem("authToken", response.data.token);
+      localStorage.setItem("role", role);
 
-      } catch (error) {
-        console.error("Error:", error.response?.data || error.message);
-        alert("Login Failed!");
+      if (role === "admin" || role === "librarian") {
+        navigate("/admin");
+      } else {
+        navigate("/");
       }
-    };
 
+      alert("Login Successful!");
+    } catch (error) {
+      console.error("Error:", error.response?.data || error.message);
+      alert("Login Failed!");
+    }
+  };
 
-    return(
-        <div className="container mt-4">
-        <h2 className="text-center">User Login</h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="p-4 border rounded shadow">
+  return (
+    <div className="login-container">
+      <div className="login-box">
+        <h2 className="login-title">User Login</h2>
+        <form onSubmit={handleSubmit(onSubmit)} className="login-form">
           {/* Email */}
-          <div className="mb-3">
-            <label className="form-label">Email</label>
-            <input type="email" className="form-control" {...register("email", { required: "Email is required" })} />
-            {errors.email && <p className="text-danger">{errors.email.message}</p>}
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              {...register("email", { required: "Email is required" })}
+              className="form-input"
+            />
+            {errors.email && <span className="error-text">{errors.email.message}</span>}
           </div>
-  
+
           {/* Password */}
-          <div className="mb-3">
-            <label className="form-label">Password</label>
-            <input type="password" className="form-control" {...register("password", { required: "Password is required" })} />
-            {errors.password && <p className="text-danger">{errors.password.message}</p>}
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              {...register("password", { required: "Password is required" })}
+              className="form-input"
+            />
+            {errors.password && <span className="error-text">{errors.password.message}</span>}
           </div>
-  
+
+          <div className="forgot-password">
+            <button type="button" className="forgot-btn" onClick={() => navigate("/forgetpassword")}>
+              Forgot Password?
+            </button>
+          </div>
+
           {/* Submit Button */}
-          <button type="submit" className="btn btn-primary w-100">Login</button>
+          <button type="submit" className="btn-submit">Login</button>
         </form>
       </div>
-    )
+    </div>
+  );
 }

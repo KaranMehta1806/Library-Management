@@ -39,7 +39,13 @@ export default function Navbar(){
             <Link className="nav-link" to="/books">Books</Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/about">About</Link>
+            <Link className="nav-link" to="/category">Category</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/aboutus">About</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/contactus">Contact</Link>
           </li>
         </ul>
 
@@ -56,7 +62,7 @@ export default function Navbar(){
               </button>
               <ul className="dropdown-menu dropdown-menu-end">
                 <li>
-                  <Link className="dropdown-item" to="/dashboard">Dashboard</Link>
+                  <Link className="dropdown-item" to="/user">My Profile</Link>
                 </li>
                 <li><hr className="dropdown-divider" /></li>
                 <li>

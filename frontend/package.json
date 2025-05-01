@@ -11,9 +11,12 @@
   },
   "dependencies": {
     "axios": "^1.8.1",
+    "bootstrap": "^5.3.3",
     "chart.js": "^4.4.8",
+    "framer-motion": "^12.9.2",
     "http-status": "^2.1.0",
     "react": "^19.0.0",
+    "react-bootstrap": "^2.10.9",
     "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
