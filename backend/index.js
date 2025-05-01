@@ -6,6 +6,7 @@ require('dotenv').config();
 const users = require("./routes/user.js") 
 const books = require("./routes/books.js")
 const admin = require("./routes/admin.js")
+const librarian = require("./routes/librarian.js")
 // const seedAdmin = require("./controller/admin.js");
 
 // const indexController  = require("./controller/indexController");
@@ -22,6 +23,7 @@ app.use(cors());
 app.use("/users",users);
 app.use("/books",books);
 app.use("/admin",admin);
+app.use("/librarian",librarian);
 
 app.get("/", (req, res) => {
     res.send("API is running...");
