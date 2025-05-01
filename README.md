@@ -96,7 +96,7 @@ Check out the live demo of the project:https://library-management-app-karan.verc
 Clone the project repository to your local machine using the following command:
 
 ```bash
-git clone https://github.com/KaranMehta1806/DoorStepService.git
+git clone https://github.com/KaranMehta1806/Library-Management.git
 ```
 
 ### 2. Install Dependencies
