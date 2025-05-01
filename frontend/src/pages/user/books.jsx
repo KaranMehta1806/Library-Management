@@ -53,7 +53,7 @@ const Books = () => {
       }
 
   useEffect(() => {
-    axios.get("http://localhost:5000/books")
+    axios.get(`${Server_URL}books`)
       .then((response) => {
         if (!response.data.error) {
           setBooks(response.data.books);

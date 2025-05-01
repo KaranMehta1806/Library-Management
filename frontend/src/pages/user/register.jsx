@@ -1,6 +1,7 @@
 import React from "react";
 import {useForm} from "react-hook-form";
 import axios from "axios";
+import { Server_URL } from "../../utils/config";
 
 export default function Register(){
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -9,7 +10,7 @@ export default function Register(){
     const onSubmit =async (data) => {
       try{
         const formData = { ...data, role: "user" };
-      const response = await axios.post("http://localhost:5000/users/register", formData);
+      const response = await axios.post(`${Server_URL}users/register`, formData);
 
       console.log("Response:", response.data);
       alert("Registration Successful!");

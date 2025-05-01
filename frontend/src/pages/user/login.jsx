@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./login.css"; // Custom styling
+import { Server_URL } from "../../utils/config";
 
 export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -10,7 +11,7 @@ export default function Login() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post("http://localhost:5000/users/login", data);
+      const response = await axios.post(`${Server_URL}users/login`, data);
       const { role, token } = response.data.user;
 
       localStorage.setItem("authToken", response.data.token);
