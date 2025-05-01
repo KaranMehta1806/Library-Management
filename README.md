@@ -1,14 +1,13 @@
 # 📚 Library Management System (MERN Stack)
 
 ![MERN Stack](https://img.shields.io/badge/MERN-Full%20Stack-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
-[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://your-vercel-app-url.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://library-management-app-karan.vercel.app/)
 
 A complete Library Management System built with MongoDB, Express.js, React.js, and Node.js. Features role-based access control with three user types (Admin, Librarian, Student), book management with Cloudinary image uploads, issue/return tracking, and automated fine calculations.
 
 ## ✨ Live Demo
 
-Access the deployed application: [Live Demo](https://your-vercel-app-url.vercel.app)
+Access the deployed application: [Live Demo](https://library-management-app-karan.vercel.app/)
 
 **Test Credentials:**
 - Admin: admin@example.com / admin123
