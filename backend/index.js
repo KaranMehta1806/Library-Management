@@ -7,19 +7,17 @@ const users = require("./routes/user.js")
 const books = require("./routes/books.js")
 const admin = require("./routes/admin.js")
 const librarian = require("./routes/librarian.js")
-// const seedAdmin = require("./controller/admin.js");
 
-// const indexController  = require("./controller/indexController");
-// const {adminAuthMiddleware} = require("./middlewares/authMiddleware");
-// const {serviceProviderMiddleware} = require("./middlewares/serviceProviderMiddleware");
-// const {userAuthMiddleware} = require("./middlewares/userAuthMiddleware ");
-// const providerController = require('./controller/serviceProviderController');
-// const userController = require('./controller/userController');
-// const fileUpload = require("express-fileupload")
-
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://library-management-murex-gamma.vercel.app"
+];
 
 app.use(express.json()); // Parse JSON
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
 app.use("/users",users);
 app.use("/books",books);
 app.use("/admin",admin);
