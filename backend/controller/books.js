@@ -6,59 +6,55 @@ const calculateFine = require("../utils/fineCalculator")
 
 booksController.addNewBook = async (req, res) => {
   try {
-    // Destructure required fields including user ID
-    const { id } = req.userInfo; // Get user ID from middleware
-    const { title, author, category, isbn, totalCopies } = req.body;
-    const coverImage = req.file;
+    const {
+      title,
+      author,
+      category,
+      isbn,
+      availableCopies,
+      totalCopies,
+      coverImage,
+      price,
+      description,
+    } = req.body;
+    console.log(req.body);
+    console.log(req);
 
-    // Validate required fields
-    const requiredFields = { title, author, isbn, totalCopies, coverImage };
-    if (Object.values(requiredFields).some(field => !field)) {
-      return res.status(400).json({
-        error: true,
-        message: "Missing required fields"
-      });
-    }
-
-    // Check for existing ISBN
     const existingBook = await BookModel.findOne({ isbn });
     if (existingBook) {
-      return res.status(400).json({
-        error: true,
-        message: "Book with this ISBN already exists"
-      });
+      return res
+        .status(400)
+        .json({error:true, message: "Book with this ISBN already exists" });
     }
+    console.log("req.file")
+    console.log(req.file)
 
-    // Create new book
-    const newBook = await BookModel.create({
+    let coverImageUrl = req.file ? req.file.path : "";
+    let cloudinaryId = req.file ? req.file.filename : "";
+    console.log(coverImageUrl);
+
+    const newBook = new BookModel({
       title,
       author,
       category,
       isbn,
       availableCopies: totalCopies,
       totalCopies,
-      addedBy: id, // Using the id from userInfo
-      coverImage: coverImage.path,
-      cloudinaryId: coverImage.filename,
-      price: req.body.price || 0,
-      description: req.body.description || "No description provided"
+      addedBy:"67e45593c64642c063e82112",
+      coverImage:coverImageUrl,
+      cloudinaryId: cloudinaryId,
+      price,
+      description,
     });
 
-    // Success response
-    return res.status(201).json({
-      success: true,
-      message: "Book added successfully",
-      book: newBook
-    });
-
+    await newBook.save();
+    res.status(201).json({error:false , message: "Book added successfully", book: newBook });
   } catch (error) {
-    console.error("Add book error:", error);
-    return res.status(500).json({
-      error: true,
-      message: "Internal server error"
-    });
+    console.log(error);
+    res.status(500).json({error:true, message: "Internal Server Error", error });
   }
 };
+
 booksController.getAllBooks = async (req, res) => {
   try {
     const books = await BookModel.find().populate("addedBy", "name email role");
