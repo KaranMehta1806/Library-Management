@@ -17,21 +17,22 @@ booksController.addNewBook = async (req, res) => {
       price,
       description,
     } = req.body;
-    console.log(req.body);
-    console.log(req);
+
+    console.log("📦 Incoming book data:", JSON.stringify(req.body, null, 2));
+    console.log("📝 Full request received");
 
     const existingBook = await BookModel.findOne({ isbn });
     if (existingBook) {
+      console.warn("⚠️ Duplicate ISBN found:", isbn);
       return res
         .status(400)
-        .json({error:true, message: "Book with this ISBN already exists" });
+        .json({ error: true, message: "Book with this ISBN already exists" });
     }
-    console.log("req.file")
-    console.log(req.file)
 
-    let coverImageUrl = req.file ? req.file.path : "";
-    let cloudinaryId = req.file ? req.file.filename : "";
-    console.log(coverImageUrl);
+    console.log("📷 File Info:", req.file ? JSON.stringify(req.file, null, 2) : "No file uploaded");
+
+    const coverImageUrl = req.file ? req.file.path : "";
+    const cloudinaryId = req.file ? req.file.filename : "";
 
     const newBook = new BookModel({
       title,
@@ -40,18 +41,21 @@ booksController.addNewBook = async (req, res) => {
       isbn,
       availableCopies: totalCopies,
       totalCopies,
-      addedBy:"67e45593c64642c063e82112",
-      coverImage:coverImageUrl,
+      addedBy: "67e45593c64642c063e82112", // Consider converting to ObjectId
+      coverImage: coverImageUrl,
       cloudinaryId: cloudinaryId,
       price,
       description,
     });
 
     await newBook.save();
-    res.status(201).json({error:false , message: "Book added successfully", book: newBook });
+    console.log("✅ Book saved successfully:", newBook._id);
+    res.status(201).json({ error: false, message: "Book added successfully", book: newBook });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({error:true, message: "Internal Server Error", error });
+    console.error("❌ Error occurred while adding book:");
+    console.error("🔴 Message:", error.message);
+    console.error("📄 Stack Trace:", error.stack);
+    res.status(500).json({ error: true, message: "Internal Server Error", error: error.message });
   }
 };
 
