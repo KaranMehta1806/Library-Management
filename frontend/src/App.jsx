@@ -1,7 +1,6 @@
-import { useState } from 'react'
-import {BrowserRouter as Router, HashRouter, Routes, Route } from "react-router-dom";
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect } from 'react';
+import {BrowserRouter as Router, HashRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 import './App.css'
 import Login from "./pages/user/login"
 import Register from './pages/user/register';
@@ -27,6 +26,25 @@ import VerifyOTP from './pages/user/ForgetPassword/VerifyOtp';
 import ResetPassword from './pages/user/ForgetPassword/UpdatePassword';
 // import AdminDashboard from './pages/admin/admindashboard';
 function App() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const token = localStorage.getItem("userAuthToken");
+    if (token && location.pathname === "/") { // Check if the user is on the landing page
+      try {
+        const decoded = jwtDecode(token);
+        if (decoded.role === "admin") {
+          navigate("/admin-dashboard");
+        } else if (decoded.role === "user") {
+          navigate("/user-home");
+        }
+      } catch (err) {
+        console.error("Token decode failed", err);
+        localStorage.removeItem("userAuthToken");
+      }
+    }
+  }, [location.pathname]);
 
   return (
     <HashRouter>
