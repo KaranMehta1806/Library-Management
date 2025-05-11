@@ -6,59 +6,59 @@ const calculateFine = require("../utils/fineCalculator")
 
 booksController.addNewBook = async (req, res) => {
   try {
-    const {
-      title,
-      author,
-      category,
-      isbn,
-      availableCopies,
-      totalCopies,
-      coverImage,
-      price,
-      description,
-    } = req.body;
+    // Destructure required fields including user ID
+    const { id } = req.userInfo; // Get user ID from middleware
+    const { title, author, category, isbn, totalCopies } = req.body;
+    const coverImage = req.file;
 
-    console.log("📦 Incoming book data:", JSON.stringify(req.body, null, 2));
-    console.log("📝 Full request received");
-
-    const existingBook = await BookModel.findOne({ isbn });
-    if (existingBook) {
-      console.warn("⚠️ Duplicate ISBN found:", isbn);
-      return res
-        .status(400)
-        .json({ error: true, message: "Book with this ISBN already exists" });
+    // Validate required fields
+    const requiredFields = { title, author, isbn, totalCopies, coverImage };
+    if (Object.values(requiredFields).some(field => !field)) {
+      return res.status(400).json({
+        error: true,
+        message: "Missing required fields"
+      });
     }
 
-    console.log("📷 File Info:", req.file ? JSON.stringify(req.file, null, 2) : "No file uploaded");
+    // Check for existing ISBN
+    const existingBook = await BookModel.findOne({ isbn });
+    if (existingBook) {
+      return res.status(400).json({
+        error: true,
+        message: "Book with this ISBN already exists"
+      });
+    }
 
-    const coverImageUrl = req.file ? req.file.path : "";
-    const cloudinaryId = req.file ? req.file.filename : "";
-
-    const newBook = new BookModel({
+    // Create new book
+    const newBook = await BookModel.create({
       title,
       author,
       category,
       isbn,
       availableCopies: totalCopies,
       totalCopies,
-      addedBy: "67e45593c64642c063e82112", // Consider converting to ObjectId
-      coverImage: coverImageUrl,
-      cloudinaryId: cloudinaryId,
-      price,
-      description,
+      addedBy: id, // Using the id from userInfo
+      coverImage: coverImage.path,
+      cloudinaryId: coverImage.filename,
+      price: req.body.price || 0,
+      description: req.body.description || "No description provided"
     });
 
-    await newBook.save();
-    console.log("✅ Book saved successfully:", newBook._id);
-    res.status(201).json({ error: false, message: "Book added successfully", book: newBook });
+    // Success response
+    return res.status(201).json({
+      success: true,
+      message: "Book added successfully",
+      book: newBook
+    });
+
   } catch (error) {
-    console.error("❌ Error occurred while adding book:");
-    console.error("🔴 Message:", error.message);
-    console.error("📄 Stack Trace:", error.stack);
-    res.status(500).json({ error: true, message: "Internal Server Error", error: error.message });
+    console.error("Add book error:", error);
+    return res.status(500).json({
+      error: true,
+      message: "Internal server error"
+    });
   }
 };
-
 booksController.getAllBooks = async (req, res) => {
   try {
     const books = await BookModel.find().populate("addedBy", "name email role");

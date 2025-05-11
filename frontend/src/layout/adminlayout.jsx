@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import AdminNavbar from "../components/adminnavbar";
 import Footer from "../components/footer"
+import { ToastContainer } from 'react-toastify';
 
 export default function adminLayout() {
   const [render,setRender] = useState(false);
@@ -27,6 +28,18 @@ export default function adminLayout() {
           <Footer /></> :
           null
           }
+          <ToastContainer
+position="top-right"
+autoClose={1000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
         
           
       
