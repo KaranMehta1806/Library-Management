@@ -47,7 +47,7 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <HashRouter>
+    // <HashRouter>
       <Routes>
       <Route path="/">
       <Route path='/admin-login' element={<AdminLogin/>}/>
@@ -81,7 +81,7 @@ function App() {
       </Route>
         
       </Routes>
-    </HashRouter>
+    // </HashRouter>
   )
 }
 
