@@ -30,14 +30,14 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
-    const token = localStorage.getItem("userAuthToken");
+    const token = localStorage.getItem("authToken");
     if (token && location.pathname === "/") { // Check if the user is on the landing page
       try {
         const decoded = jwtDecode(token);
         if (decoded.role === "admin") {
-          navigate("/admin-dashboard");
+          navigate("/admin");
         } else if (decoded.role === "user") {
-          navigate("/user-home");
+          navigate("/");
         }
       } catch (err) {
         console.error("Token decode failed", err);
