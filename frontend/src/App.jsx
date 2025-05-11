@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import {BrowserRouter as Router, HashRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import jwtDecode from "jwt-decode";
+import  { jwtDecode } from "jwt-decode";
 import './App.css'
 import Login from "./pages/user/login"
 import Register from './pages/user/register';
