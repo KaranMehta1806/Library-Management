@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Server_URL } from "../../utils/config";
+import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
+
 import "./viewbook.css"
 
 const ViewBooks = () => {
@@ -40,11 +42,11 @@ const ViewBooks = () => {
       await axios.delete(`${Server_URL}books/delete/${id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });
-      alert("Book deleted successfully!");
+      showSuccessToast("Book deleted successfully!");
       fetchBooks();
     } catch (error) {
       console.error("Error deleting book:", error.response?.data?.message || error.message);
-      alert("Failed to delete book!");
+      showErrorToast("Failed to delete book!");
     }
   };
 
@@ -75,12 +77,12 @@ const ViewBooks = () => {
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });
   
-      alert("Book updated successfully!");
+      showSuccessToast("Book updated successfully!");
       setShowModal(false);
       fetchBooks();
     } catch (error) {
       console.error("Error updating book:", error.response?.data?.message || error.message);
-      alert("Failed to update book!");
+      showErrorToast("Failed to update book!");
     }
   };
   
