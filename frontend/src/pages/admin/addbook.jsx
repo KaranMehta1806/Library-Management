@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Server_URL } from "../../utils/config";
-import { showSuccessToast, showErrorToast } from "../.. /utils/toasthelper";
+import { showSuccessToast, showErrorToast } from "../../utils/toasthelper";
 
 
 
