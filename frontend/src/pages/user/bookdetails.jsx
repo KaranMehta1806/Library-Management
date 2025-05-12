@@ -184,6 +184,13 @@ function BookDetails() {
                                 <span className="meta-value">₹{book.price}</span>
                             </div>
                         </div>
+                        <div className="meta-item">
+                            <IoMdTime className="meta-icon" />
+                            <div>
+                                <span className="meta-label">Published</span>
+                                <span className="meta-value">{book.publishedYear || 'N/A'}</span>
+                            </div>
+                        </div>
                     </div>
                     
                     <div className="book-description">
