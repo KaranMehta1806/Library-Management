@@ -67,9 +67,9 @@ export default function AdminNavbar(){
             <Link className="nav-link" to="/admin/returnrequest">Return Request</Link>
           </li> :null}
 
-          {role == "librarian"?<li className="nav-item">
+          <li className="nav-item">
             <Link className="nav-link" to="/admin/issued">Books Borrowed</Link>
-          </li> :null}
+          </li>
 
           {role == "admin"?<li className="nav-item">
             <Link className="nav-link" to="/admin/addlibrarian">Add Librarian</Link>
