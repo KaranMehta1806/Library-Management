@@ -3,6 +3,7 @@ import axios from "axios";
 import { Server_URL } from "../../utils/config";
 import "./profile.css";
 import { getAuthToken } from "../../utils/auth";
+import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
 
 function ProfilePage() {
   const [user, setUser] = useState([]);
@@ -17,13 +18,8 @@ function ProfilePage() {
       });
       if (response.data.issuedBooks.length === 0) {
         console.log("No issued books found.");
-        // You can show a message or fallback UI here if needed
       }
-      // const response = await axios.get(`${Server_URL}books/issued`
-      //     , {
-      //     headers: { Authorization: `Bearer ${authToken}` },
-      // }
-      // );
+     
       setIssuedBooks(response.data.issuedBooks);
       console.log("success");
     } catch (error) {
@@ -35,8 +31,7 @@ function ProfilePage() {
       const response = await axios.get(`${Server_URL}users/profile`, {
         headers: { Authorization: `Bearer ${getAuthToken()}` },
       });
-      // console.log("response")
-      // console.log(response.data)
+      
       const { user } = response.data;
       setUser(user);
     } catch (error) {
@@ -56,12 +51,12 @@ function ProfilePage() {
         {},
         { headers: { Authorization: `Bearer ${getAuthToken()}` } }
       );
-      alert(response.data.message);
+      showSuccessToast(response.data.message);
       fetchIssuedBooks();
     //   setIssuedBooks(issuedBooks.filter((book) => book._id !== borrowId));
     } catch (error) {
       console.error("Error returning book:", error);
-      alert(error.response?.data?.message || "Something went wrong!");
+      showErrorToast(error.response?.data?.message || "Something went wrong!");
     }
   }
 
@@ -71,7 +66,7 @@ function ProfilePage() {
     <div className="profile-page">
       <div className="profile-container">
         <div className="profile-info">
-          {/* <img src={user.coverImage || "/default-avatar.png"} alt="User Avatar" className="profile-img" /> */}
+          
           <h1>{user.name}</h1>
           <p>
             <strong>Email:</strong> {user.email}

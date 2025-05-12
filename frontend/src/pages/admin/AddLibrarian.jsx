@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Server_URL } from "../../utils/config";
+import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
+
 
 export default function AddLibrarian() {
   const {
@@ -28,10 +30,10 @@ export default function AddLibrarian() {
       );
 
       console.log("Response:", response.data);
-      alert("Registration Successful!");
+      showSuccessToast("Registration Successful!");
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
-      alert("Registration Failed!");
+      showErrorToast("Registration Failed!");
     }
     // Set default role to "user"
 

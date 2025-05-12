@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Server_URL } from "../../utils/config";
+import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
+
 
 export default function LibrarianRequests() {
   const [requests, setRequests] = useState([]);
@@ -34,15 +36,15 @@ export default function LibrarianRequests() {
       });
   
       // If successful
-      alert(response.data.message || "Book issued successfully!");
+      showSuccessToast(response.data.message || "Book issued successfully!");
       fetchRequests();
     } catch (err) {
       if (err.response) {
         const message = err.response.data?.error || "Something went wrong";
-        alert( message);
+        showErrorToast( message);
       } else {
         // Other errors like network issues
-        alert("Network error: " + err.message);
+        showErrorToast("Network error: " + err.message);
       }
       console.error("Error approving request:", err);
     }

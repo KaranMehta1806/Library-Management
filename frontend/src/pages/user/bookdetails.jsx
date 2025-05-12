@@ -7,6 +7,8 @@ import { FaBookOpen, FaUserEdit, FaTags, FaBarcode, FaRupeeSign, FaInfoCircle } 
 import { IoMdTime } from "react-icons/io";
 import { RiBookmarkLine } from "react-icons/ri";
 import "./bookdetails.css"
+import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
+
 
 function BookDetails() {
     const { id } = useParams();
@@ -52,7 +54,7 @@ function BookDetails() {
           const authToken = localStorage.getItem("authToken");
           console.log(authToken)
           if (!authToken) {
-            alert("Please login to issue a book.");
+            showErrorToast("Please login to issue a book.");
             return;
         }
            const url =Server_URL + 'borrow/request-issue/'+bookid;
@@ -66,14 +68,14 @@ function BookDetails() {
           const {error,message} = response.data;
           if(error){
             console.log(error);
-            alert(message)
+            showErrorToast(message)
           }
           else{
-            alert(message);
+            showSuccessToast(message);
           }
         } catch (error) {
           // console.error("Error:", error.response?.data || error.message);
-          alert(error.response?.data?.message || "Something went wrong! Please try again.");
+          showErrorToast(error.response?.data?.message || "Something went wrong! Please try again.");
           
         }    
       }

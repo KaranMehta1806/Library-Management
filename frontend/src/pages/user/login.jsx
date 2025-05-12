@@ -4,6 +4,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./login.css"; // Custom styling
 import { Server_URL } from "../../utils/config";
+import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
+
 
 export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -23,10 +25,10 @@ export default function Login() {
         navigate("/");
       }
 
-      alert("Login Successful!");
+      showSuccessToast("Login Successful!");
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
-      alert("Login Failed!");
+      showErrorToast("Login Failed!");
     }
   };
 
@@ -35,7 +37,7 @@ export default function Login() {
       <div className="login-box">
         <h2 className="login-title">User Login</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="login-form">
-          {/* Email */}
+         
           <div className="form-group">
             <label>Email</label>
             <input
@@ -46,7 +48,7 @@ export default function Login() {
             {errors.email && <span className="error-text">{errors.email.message}</span>}
           </div>
 
-          {/* Password */}
+          
           <div className="form-group">
             <label>Password</label>
             <input
@@ -63,7 +65,7 @@ export default function Login() {
             </button>
           </div>
 
-          {/* Submit Button */}
+          
           <button type="submit" className="btn-submit">Login</button>
         </form>
       </div>

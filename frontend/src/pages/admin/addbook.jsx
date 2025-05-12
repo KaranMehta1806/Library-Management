@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Server_URL } from "../../utils/config";
+import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
+
 
 const AddBookForm = () => {
   const {
@@ -41,15 +43,15 @@ const AddBookForm = () => {
       const { error, message } = response.data;
 
       if (error) {
-        alert(message);
+        showErrorToast(message);
       } else {
-        alert(message);
+        showSuccessToast(message);
         reset();
       }
       
     } catch (error) {
       console.error("Error:", error.response?.data?.message || error.message);
-      alert("Failed to add book!");
+      showErrorToast("Failed to add book!");
     }
   };
 

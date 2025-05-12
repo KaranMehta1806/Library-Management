@@ -6,7 +6,7 @@ import './about.css';
 const AboutUs = () => {
   return (
     <div className="about-page">
-      {/* Hero Section */}
+    
       <section className="about-hero-section">
         <div className="about-container">
           <h1 className="about-hero-title">About Our College Library</h1>
@@ -14,7 +14,7 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Mission Section */}
+      
       <section className="about-mission-section">
         <div className="about-container">
           <div className="about-mission-content">
@@ -37,7 +37,7 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* History Section */}
+    
       <section className="about-history-section">
         <div className="about-container">
           <h2 className="about-section-title about-history-title">Our History</h2>
@@ -74,7 +74,7 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
+     
       <section className="about-stats-section">
         <div className="about-container">
           <h2 className="about-stats-title">By The Numbers</h2>

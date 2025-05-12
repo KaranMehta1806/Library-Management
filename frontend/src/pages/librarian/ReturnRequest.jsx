@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Server_URL } from "../../utils/config";
+import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
+
 
 export default function ReturnRequest() {
   const [requests, setRequests] = useState([]);
@@ -32,11 +34,11 @@ export default function ReturnRequest() {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`
         }
       });
-      alert("Book Return successfully!");
+      showSuccessToast(response.data.message || "Book Return successfully!");
       setRequests(prev => prev.filter(req => req._id !== id));
     } catch (err) {
       console.error("Error approving request", err);
-      alert("Failed to approve request");
+      showErrorToast("Failed to approve request");
     }
   };
 

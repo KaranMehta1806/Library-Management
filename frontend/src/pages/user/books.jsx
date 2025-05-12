@@ -3,6 +3,8 @@ import axios from "axios";
 import "./books.css"
 import { useNavigate } from "react-router-dom";
 import { Server_URL } from "../../utils/config";
+import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
+
 
 const Books = () => {
   const [books, setBooks] = useState([]);
@@ -21,7 +23,7 @@ const Books = () => {
           const authToken = localStorage.getItem("authToken");
           console.log(authToken)
           if (!authToken) {
-            alert("Please login to issue a book.");
+            showErrorToast("Please login to issue a book.");
             return;
         }
            const url =Server_URL + 'borrow/request-issue/'+bookid;
@@ -35,14 +37,14 @@ const Books = () => {
           const {error,message} = response.data;
           if(error){
             console.log(error);
-            alert(message)
+            showErrorToast(message)
           }
           else{
-            alert(message);
+            showSuccessToast(message);
           }
         } catch (error) {
           // console.error("Error:", error.response?.data || error.message);
-          alert(error.response?.data?.message || "Something went wrong! Please try again.");
+          showErrorToast(error.response?.data?.message || "Something went wrong! Please try again.");
           
         }    
       }
@@ -95,7 +97,7 @@ const Books = () => {
     <div className="container-fluid">
       <div className="row">
         
-        {/* Sidebar */}
+       
         <div className="col-md-3 p-3 bg-light shadow-sm">
           <h4 className="text-center">📚 Categories</h4>
           <ul className="list-group mt-3">
@@ -108,7 +110,7 @@ const Books = () => {
           </ul>
         </div>
 
-        {/* Books Section */}
+       
         <div className="col-md-9">
   <div className="d-flex justify-content-between align-items-center p-3">
     <h2 className="text-primary">📖 All Books</h2>
