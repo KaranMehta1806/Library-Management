@@ -12,6 +12,8 @@ const Books = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [isLoading, setIsLoading] = useState(true);
+
 
   const navigate = useNavigate();
 
@@ -55,6 +57,7 @@ const Books = () => {
       }
 
   useEffect(() => {
+    setIsLoading(true);
     axios.get(`${Server_URL}books`)
       .then((response) => {
         if (!response.data.error) {
@@ -66,6 +69,8 @@ const Books = () => {
       })
       .catch((error) => {
         console.error("Error fetching books:", error);
+      }).finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
