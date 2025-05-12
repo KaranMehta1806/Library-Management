@@ -1,4 +1,3 @@
-/* Base Styles */
 :root {
     --primary-color: #4361ee;
     --secondary-color: #3f37c9;
@@ -27,7 +26,7 @@ body {
     background-color: #f5f7fa;
 }
 
-/* Loading States */
+
 .loading-container {
     display: flex;
     flex-direction: column;
@@ -122,7 +121,7 @@ body {
     background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .book-image {
