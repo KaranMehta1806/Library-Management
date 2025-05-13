@@ -44,7 +44,7 @@ function App() {
     if (token && location.pathname === "/") {
       try {
         const decoded = jwtDecode(token);
-        if (decoded.role === "admin") {
+        if (decoded.role === "admin" || decoded.role === "librarian") {
           navigate("/admin");
         } else if (decoded.role === "user") {
           navigate("/");

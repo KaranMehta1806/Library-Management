@@ -18,7 +18,7 @@ booksController.addNewBook = async (req, res) => {
       description,
     } = req.body;
     console.log(req.body);
-    console.log(req);
+    const {id} = req.userInfo;
 
     const existingBook = await BookModel.findOne({ isbn });
     if (existingBook) {
@@ -40,7 +40,7 @@ booksController.addNewBook = async (req, res) => {
       isbn,
       availableCopies: totalCopies,
       totalCopies,
-      addedBy:"67e45593c64642c063e82112",
+      addedBy:id,
       coverImage:coverImageUrl,
       cloudinaryId: cloudinaryId,
       price,
