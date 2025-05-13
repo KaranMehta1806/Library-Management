@@ -10,6 +10,7 @@ const AdminDashboard = () => {
   const [user, setUser] = useState([]);
   const [lib, setLib] = useState([]);
   const [books, setBooks] = useState([]);
+  const [latestBooks, setLatestBooks] = useState([]);
   const [totalUser, setTotalUser] = useState(0);
   const [totalLib, setTotalLib] = useState(0);
   const [totalBooks, setTotalBooks] = useState(0);
@@ -105,6 +106,24 @@ const AdminDashboard = () => {
     }
   }
 
+  async function getLatestBooks() {
+    try {
+      const url = Server_URL + 'books/new';
+      const result = await axios.get(url);
+      const {error, message} = result.data;
+      if (error) {
+        alert(message);        
+      } else {
+        console.log("result");
+        console.log(result);
+        const {books, totalBooks} = result.data;
+        setLatestBooks(books);
+      }
+    } catch (error) {
+      console.error("Error fetching books:", error);            
+    }    
+  }
+
   const handleSectionChange = (section) => {
     setSelectedSection(section);
   };
@@ -112,6 +131,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     getUsers();
     getBooks();
+    getLatestBooks();
   }, []);
 
   return (
@@ -232,13 +252,13 @@ const AdminDashboard = () => {
                 </div>
 
                 <div className="activity-card">
-                  <h3>Recent Activities</h3>
+                  <h3>Recent Addition</h3>
                   <div className="activity-list">
-                    {books.slice(0, 4).map((book, index) => (
+                    {latestBooks.slice(0, 4).map((book, index) => (
                       <div key={index} className="activity-item">
                         <div className="activity-icon">📚</div>
                         <div className="activity-text">
-                          <strong>{book.title}</strong> by {book.author} added
+                          <strong>{book.title}</strong> added by {book.addedBy?.name} 
                         </div>
                       </div>
                     ))}
