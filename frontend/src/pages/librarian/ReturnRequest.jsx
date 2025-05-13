@@ -29,7 +29,7 @@ export default function ReturnRequest() {
   const approveRequest = async (id) => {
     try {
         const url = Server_URL + "librarian/approvereturnrequest/" + id;
-      await axios.put(url , {}, {
+      const response = await axios.put(url , {}, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`
         }
