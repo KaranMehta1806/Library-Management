@@ -9,6 +9,7 @@ export default function AddLibrarian() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -31,6 +32,7 @@ export default function AddLibrarian() {
 
       console.log("Response:", response.data);
       showSuccessToast("Registration Successful!");
+      reset();
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
       showErrorToast("Registration Failed!");

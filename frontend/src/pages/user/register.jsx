@@ -6,7 +6,7 @@ import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
 
 
 export default function Register(){
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
 
     const onSubmit =async (data) => {
@@ -16,6 +16,7 @@ export default function Register(){
 
       console.log("Response:", response.data);
       showSuccessToast("Registration Successful!");
+      reset();
 
 
       }catch(error){
