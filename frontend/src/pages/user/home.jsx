@@ -74,9 +74,9 @@ export default function Home() {
             <FiBook size={18} className="mr-2" />
               Browse collections
             </Link>
-            <Link to="/login" className="btn btn-secondary">
+            {/* <Link to="/login" className="btn btn-secondary">
               Student Login
-            </Link>
+            </Link> */}
           </div>
         </div>
       </header>
