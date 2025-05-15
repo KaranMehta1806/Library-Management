@@ -127,7 +127,7 @@ userController.forgotPassword = async (req, res) => {
   const { email } = req.body;
   try {
     const user = await UserModel.findOne({ email });
-    if (!user) return res.status(200).json({ message: "User not found" });
+    if (!user) return res.status(400).json({ message: "User not found" });
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
