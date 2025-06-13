@@ -102,7 +102,7 @@ const Books = () => {
   return (
     <div className="container-fluid books-container">
       <div className="row">
-        {/* Sidebar */}
+      
         <div className="col-md-3 p-4 sidebar">
           <h4 className="text-center mb-4">📚 Categories</h4>
           <div className="category-scroll">
@@ -120,7 +120,6 @@ const Books = () => {
           </div>
         </div>
 
-        {/* Main Content */}
         <div className="col-md-9 main-content">
           <div className="search-header p-3">
             <h2 className="page-title">All Books</h2>

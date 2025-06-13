@@ -14,12 +14,12 @@ export default function Home() {
     students: 0
   });
   const [categoryCount , setCategoryCount] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     try {
-      
-      
-      // Fetch categories
+
+      setLoading(true);
       const categoriesResponse = await axios.get(Server_URL + 'books');
       if (categoriesResponse.data.error) {
         alert(categoriesResponse.data.message);
@@ -39,7 +39,7 @@ export default function Home() {
         setCategories(books);
       }
 
-      // Fetch new arrivals (you'll need to implement this endpoint)
+      
       const arrivalsResponse = await axios.get(Server_URL + 'books/new');
       console.log(arrivalsResponse);
       if (!arrivalsResponse.data.error) {
@@ -50,17 +50,20 @@ export default function Home() {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+     finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  
+    
 
   return (
     <div className="library-homepage">
-      {/* Hero Section */}
+ 
       <header className="hero-section">
         <div className="hero-overlay"></div>
         <div className="container hero-content">
@@ -74,14 +77,12 @@ export default function Home() {
             <FiBook size={18} className="mr-2" />
               Browse collections
             </Link>
-            {/* <Link to="/login" className="btn btn-secondary">
-              Student Login
-            </Link> */}
+          
           </div>
         </div>
       </header>
 
-      {/* Quick Stats */}
+     
       <section className="stats-section">
         <div className="container">
           <div className="stats-grid">
@@ -95,11 +96,7 @@ export default function Home() {
               <h3>{stats.totalBooks}+</h3>
               <p>Total Books</p>
             </div>
-            {/* <div className="stat-card">
-              <FiBook className="stat-icon" />
-              <h3>{stats.availableBooks}</h3>
-              <p>Available Now</p>
-            </div> */}
+           
             <div className="stat-cardhome">
               <FiUser className="stat-icon" />
               <h3>{stats.totalActiveStudents}</h3>
@@ -109,7 +106,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Categories Section */}
       <section className="categories-section">
         <div className="container">
           <h2 className="section-title">Browse By Categories</h2>
@@ -143,7 +139,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* New Arrivals */}
+    
       <section className="na-section">
   <div className="na-container">
     <h2 className="na-heading">New Arrivals</h2>
@@ -170,7 +166,7 @@ export default function Home() {
   </div>
 </section>
 
-      {/* Library Hours */}
+      
       <section className="hours-section">
         <div className="container">
           <h2 className="section-title">Library Hours</h2>
@@ -190,62 +186,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Quick Links */}
-      {/* <section className="quick-links">
-        <div className="container">
-          <h2 className="section-title">Quick Links</h2>
-          <div className="links-grid">
-            <Link to="/e-resources" className="link-card">
-              <div className="link-icon">
-                <FiBook />
-              </div>
-              <h3>E-Resources</h3>
-              <p>Access digital journals and databases</p>
-            </Link>
-            <Link to="/textbooks" className="link-card">
-              <div className="link-icon">
-                <FiBook />
-              </div>
-              <h3>Course Textbooks</h3>
-              <p>Find required course materials</p>
-            </Link>
-            <Link to="/thesis" className="link-card">
-              <div className="link-icon">
-                <FiBook />
-              </div>
-              <h3>Thesis Collection</h3>
-              <p>Browse past student research</p>
-            </Link>
-          </div>
-        </div>
-      </section> */}
-
-      {/* Footer */}
-      {/* <footer className="library-footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div className="footer-info">
-              <h3>College Central Library</h3>
-              <p>Knowledge Street, Campus Area</p>
-              <p>library@college.edu</p>
-              <p>+1 (123) 456-7890</p>
-            </div>
-            <div className="footer-links">
-              <h3>Quick Links</h3>
-              <ul>
-                <li><Link to="/about">About Us</Link></li>
-                <li><Link to="/services">Services</Link></li>
-                <li><Link to="/rules">Library Rules</Link></li>
-                <li><Link to="/contact">Contact Us</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>&copy; {new Date().getFullYear()} College Central Library. All rights reserved.</p>
-          </div>
-        </div>
-      </footer> */}
     </div>
   );
 }
