@@ -5,12 +5,12 @@ import "./allcategories.css";
 import { Link } from "react-router-dom";
 import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
 
-
 export default function ViewAllCategories() {
   const [books, setBooks] = useState([]);
   const [filterBooks, setFilteredBooks] = useState([]);
   const [activeCategory, setActiveCategory] = useState("All");
   const [categoryCounts, setCategoryCounts] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const fetchCategories = async () => {
     try {
@@ -22,21 +22,20 @@ export default function ViewAllCategories() {
         alert(message);
       } else {
         const { books } = response.data;
-        console.log(books);
         setBooks(books);
         setFilteredBooks(books);
         const categoryCountMap = {};
-      books.forEach((book) => {
-        const cat = book.category;
-        categoryCountMap[cat] = (categoryCountMap[cat] || 0) + 1;
-      });
-
-      setCategoryCounts(categoryCountMap);
-
-
+        books.forEach((book) => {
+          const cat = book.category;
+          categoryCountMap[cat] = (categoryCountMap[cat] || 0) + 1;
+        });
+        setCategoryCounts(categoryCountMap);
       }
     } catch (error) {
       console.error("Error fetching categories:", error);
+      showErrorToast("Failed to load categories");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -58,70 +57,86 @@ export default function ViewAllCategories() {
 
   return (
     <div className="all-categories-container">
-      <div className="all-categories-row">
-        {/* Sidebar */}
-        <nav className="all-categories-sidebar">
-          <h5 className="all-categories-sidebar-title">Categories</h5>
-          <ul className="all-categories-nav">
-            <li
-              className={`all-categories-nav-item ${
-                activeCategory === "All" ? "active" : ""
-              }`}
-              onClick={() => handleCategoryClick("All")}
-            >
-              All
-            </li>
+      {loading ? (
+        <div className="preloader-container">
+          <div className="preloader"></div>
+          <p>Loading categories...</p>
+        </div>
+      ) : (
+        <div className="all-categories-row">
+          {/* Sidebar */}
+          <nav className="all-categories-sidebar">
+            <h5 className="all-categories-sidebar-title">Categories</h5>
+            <ul className="all-categories-nav">
+              <li
+                className={`all-categories-nav-item ${
+                  activeCategory === "All" ? "active" : ""
+                }`}
+                onClick={() => handleCategoryClick("All")}
+              >
+                All <span className="category-count">({books.length})</span>
+              </li>
 
-            {[...new Set(books.map((book) => book.category))].map(
-              (category, index) => (
-                <li
-                  key={index}
-                  className={`all-categories-nav-item ${
-                    activeCategory === category ? "active" : ""
-                  }`}
-                  onClick={() => handleCategoryClick(category)}
-                >
-                  {category}
-                </li>
-              )
+              {[...new Set(books.map((book) => book.category))].map(
+                (category, index) => (
+                  <li
+                    key={index}
+                    className={`all-categories-nav-item ${
+                      activeCategory === category ? "active" : ""
+                    }`}
+                    onClick={() => handleCategoryClick(category)}
+                  >
+                    {category} <span className="category-count">({categoryCounts[category] || 0})</span>
+                  </li>
+                )
+              )}
+            </ul>
+          </nav>
+
+          {/* Main Content */}
+          <main className="all-categories-main">
+            <h2 className="all-categories-main-title">Explore All Categories</h2>
+            {filterBooks.length > 0 ? (
+              <div className="all-categories-grid">
+                {[...new Set(filterBooks.map(book => book.category))].map((category, index) => {
+                  const categoryBook = filterBooks.find(b => b.category === category);
+                  return (
+                    <div key={index} className="all-categories-card-wrapper">
+                      <div className="all-categories-card">
+                        <div className="all-categories-card-img-container">
+                          <img
+                            src={categoryBook?.coverImage}
+                            className="all-categories-card-img"
+                            alt={category}
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = "https://via.placeholder.com/300x400?text=No+Image";
+                            }}
+                          />
+                        </div>
+                        <div className="all-categories-card-body">
+                          <h5 className="all-categories-card-title">{category}</h5>
+                          <p className="all-categories-card-count">{categoryCounts[category] || 0} {categoryCounts[category] === 1 ? 'Book' : 'Books'}</p>
+                          <Link 
+                            to={`/books?category=${encodeURIComponent(category)}`} 
+                            className="all-categories-btn"
+                          >
+                            Explore
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="all-categories-empty">
+                <p>No books found in this category.</p>
+              </div>
             )}
-          </ul>
-        </nav>
-
-        {/* Main Content */}
-        <main className="all-categories-main">
-          <h2 className="all-categories-main-title">Explore All Categories</h2>
-          {filterBooks.length > 0 ? (
-            <div className="all-categories-grid">
-              {[...new Set(filterBooks.map(book => book.category))].map((category, index) => (
-  <div key={index} className="all-categories-card-wrapper">
-    <div className="all-categories-card">
-      <img
-        src={filterBooks.find(b => b.category === category)?.coverImage}
-        className="all-categories-card-img"
-        alt={category}
-        onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = "https://via.placeholder.com/300x400?text=No+Image";
-        }}
-      />
-      <div className="all-categories-card-body">
-        <h5 className="all-categories-card-title">{category}</h5>
-        <p>Books: {categoryCounts[category] || 0}</p>
-        <Link to="/books" className="all-categories-btn">Explore</Link>
-      </div>
-    </div>
-  </div>
-))}
-
-            </div>
-          ) : (
-            <div className="all-categories-empty">
-              <p>No books found in this category.</p>
-            </div>
-          )}
-        </main>
-      </div>
+          </main>
+        </div>
+      )}
     </div>
   );
 }
