@@ -3,7 +3,7 @@ import { Server_URL } from "../../utils/config";
 import axios from "axios";
 import "./allcategories.css";
 import { Link } from "react-router-dom";
-import Loader from "../../components/Loader";
+import Loader from "../../components/Preloader";
 import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
 
 export default function ViewAllCategories() {
