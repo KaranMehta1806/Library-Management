@@ -93,33 +93,27 @@ export default function ViewAllCategories() {
           <h2 className="all-categories-main-title">Explore All Categories</h2>
           {filterBooks.length > 0 ? (
             <div className="all-categories-grid">
-              {filterBooks.map((book, index) => (
-                <div key={index} className="all-categories-card-wrapper">
-                  <div className="all-categories-card">
-                    <img
-                      src={book.coverImage}
-                      className="all-categories-card-img"
-                      alt={book.title}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src =
-                          "https://via.placeholder.com/300x400?text=No+Image";
-                      }}
-                    />
-                    <div className="all-categories-card-body">
-                      <h5 className="all-categories-card-title">
-                        {book.category}
-                      </h5>
-                      <p >
-                       Books :  {categoryCounts[book.category] || 0}
-                      </p>
-                      <Link to="/books" className="all-categories-btn">
-                        Explore
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
+              {[...new Set(filterBooks.map(book => book.category))].map((category, index) => (
+  <div key={index} className="all-categories-card-wrapper">
+    <div className="all-categories-card">
+      <img
+        src={filterBooks.find(b => b.category === category)?.coverImage}
+        className="all-categories-card-img"
+        alt={category}
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = "https://via.placeholder.com/300x400?text=No+Image";
+        }}
+      />
+      <div className="all-categories-card-body">
+        <h5 className="all-categories-card-title">{category}</h5>
+        <p>Books: {categoryCounts[category] || 0}</p>
+        <Link to="/books" className="all-categories-btn">Explore</Link>
+      </div>
+    </div>
+  </div>
+))}
+
             </div>
           ) : (
             <div className="all-categories-empty">
