@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import AdminNavbar from "../components/adminnavbar";
-import Footer from "../components/footer"
+import AdminFooter from "../components/AdminFooter";
 import { ToastContainer } from 'react-toastify';
 
 export default function adminLayout() {
@@ -25,7 +25,7 @@ export default function adminLayout() {
 
     {render ? <><AdminNavbar />
           <Outlet />
-          <Footer /></> :
+          <AdminFooter /></> :
           null
           }
           <ToastContainer
@@ -39,10 +39,7 @@ pauseOnFocusLoss
 draggable
 pauseOnHover
 theme="light"
-/>
-        
-          
-      
+/> 
     </>
   );
 }

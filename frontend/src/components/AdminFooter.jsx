@@ -12,7 +12,7 @@ import {
 } from 'react-icons/fi';
 import './footer.css';
 
-const Footer = () => {
+const AdminFooter = () => {
   
   const handleLinkClick = () => {
     window.scrollTo({
@@ -99,4 +99,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default AdminFooter;
