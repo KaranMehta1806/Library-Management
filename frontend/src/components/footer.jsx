@@ -13,7 +13,7 @@ import {
 import './footer.css';
 
 const Footer = () => {
-  // Function to handle smooth scrolling to top
+  
   const handleLinkClick = () => {
     window.scrollTo({
       top: 0,
@@ -24,9 +24,9 @@ const Footer = () => {
   return (
     <footer className="library-footer">
       <div className="footer-container">
-        {/* Main Footer Content */}
+      
         <div className="footer-main">
-          {/* About Column */}
+   
           <div className="footer-column">
             <h3 className="footer-heading">About Us</h3>
             <p className="footer-about-text">
@@ -50,7 +50,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links Column */}
+       
           <div className="footer-column">
             <h3 className="footer-heading">Quick Links</h3>
             <ul className="footer-links">
@@ -62,20 +62,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Resources Column */}
-          {/* <div className="footer-column">
-            <h3 className="footer-heading">Resources</h3>
-            <ul className="footer-links">
-              <li><Link to="/catalog" className="footer-link" onClick={handleLinkClick}>Library Catalog</Link></li>
-              <li><Link to="/databases" className="footer-link" onClick={handleLinkClick}>Research Databases</Link></li>
-              <li><Link to="/ebooks" className="footer-link" onClick={handleLinkClick}>E-Books</Link></li>
-              <li><Link to="/journals" className="footer-link" onClick={handleLinkClick}>E-Journals</Link></li>
-              <li><Link to="/theses" className="footer-link" onClick={handleLinkClick}>Theses & Dissertations</Link></li>
-              <li><Link to="/guides" className="footer-link" onClick={handleLinkClick}>Research Guides</Link></li>
-            </ul>
-          </div> */}
+         
 
-          {/* Contact Column */}
+        
           <div className="footer-column">
             <h3 className="footer-heading">Contact Us</h3>
             <ul className="footer-contact-info">
@@ -102,7 +91,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Footer Bottom */}
+        
         <div className="footer-bottom">
           <div className="footer-copyright">
             &copy; {new Date().getFullYear()} College Library. All rights reserved.

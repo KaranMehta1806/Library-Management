@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { Server_URL } from "../../../utils/config";
 import { useNavigate } from "react-router-dom";
-import "./UpdatePassword.css"; // Create this CSS file
+import "./UpdatePassword.css";
 
 function ResetPassword() {
   const { 

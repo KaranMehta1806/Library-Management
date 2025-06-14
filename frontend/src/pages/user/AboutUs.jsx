@@ -103,35 +103,7 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Team Section */}
-      {/* <section className="about-team-section">
-        <div className="about-container">
-          <h2 className="about-section-title">Meet Our Team</h2>
-          <p className="about-team-subtitle">Dedicated professionals supporting your academic journey</p>
-          <div className="about-team-grid">
-            <div className="about-team-member">
-              <img src="/images/librarian1.jpg" alt="Head Librarian" className="about-team-img" />
-              <h3 className="about-team-name">Dr. Sarah Johnson</h3>
-              <p className="about-team-position">Head Librarian</p>
-              <p className="about-team-bio">PhD in Library Science with 15 years of academic library experience.</p>
-            </div>
-            <div className="about-team-member">
-              <img src="/images/librarian2.jpg" alt="Reference Librarian" className="about-team-img" />
-              <h3 className="about-team-name">Michael Chen</h3>
-              <p className="about-team-position">Reference Librarian</p>
-              <p className="about-team-bio">Specializes in research methodologies and citation management.</p>
-            </div>
-            <div className="about-team-member">
-              <img src="/images/librarian3.jpg" alt="Technical Services" className="about-team-img" />
-              <h3 className="about-team-name">Emma Rodriguez</h3>
-              <p className="about-team-position">Technical Services</p>
-              <p className="about-team-bio">Manages our digital resources and catalog systems.</p>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
-      {/* Facilities Section */}
+      
       <section className="about-facilities-section">
         <div className="about-container">
           <h2 className="about-section-title">Our Facilities</h2>

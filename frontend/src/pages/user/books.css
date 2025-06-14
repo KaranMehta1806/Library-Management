@@ -3,7 +3,7 @@
   background-color: #f8f9fa;
 }
 
-/* Sidebar styling */
+
 .sidebar {
   background: #ffffff;
   box-shadow: 2px 0 15px rgba(0, 0, 0, 0.06);
@@ -67,7 +67,7 @@
 }
 
 
-/* Main content styling */
+
 .main-content {
   padding: 20px;
 }
@@ -107,7 +107,7 @@
   color: #6c757d;
 }
 
-/* Books grid styling */
+
 .books-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -206,7 +206,7 @@
   border-radius: 5px;
 }
 
-/* Loading and empty states */
+
 .loading-spinner {
   display: flex;
   justify-content: center;
@@ -237,7 +237,7 @@
   color: #6c757d;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 768px) {
   .sidebar {
     height: auto;

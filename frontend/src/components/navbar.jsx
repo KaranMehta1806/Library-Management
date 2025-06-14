@@ -15,12 +15,12 @@ export default function Navbar(){
     return(
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow">
     <div className="container">
-      {/* Logo */}
+      
       <Link className="navbar-brand fw-bold" to="/">
         📚 AGC Library
       </Link>
 
-      {/* Mobile Toggle Button */}
+      
       <button
         className="navbar-toggler"
         type="button"
@@ -29,7 +29,7 @@ export default function Navbar(){
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      {/* Navbar Links */}
+ 
       <div className={`collapse navbar-collapse ${menuOpen ? "show" : ""}`}>
         <ul className="navbar-nav me-auto">
           <li className="nav-item">
@@ -49,7 +49,7 @@ export default function Navbar(){
           </li>
         </ul>
 
-        {/* Right Section */}
+    
         <ul className="navbar-nav">
           {token ? (
             <li className="nav-item dropdown">

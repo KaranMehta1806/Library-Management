@@ -27,7 +27,7 @@ const ForgotPassword = lazy(() => import('./pages/user/ForgetPassword/ForgetPass
 const VerifyOTP = lazy(() => import('./pages/user/ForgetPassword/VerifyOtp'));
 const ResetPassword = lazy(() => import('./pages/user/ForgetPassword/UpdatePassword'));
 
-// Preloader component
+
 const Preloader = () => (
   <div className="preloader">
     <div className="spinner"></div>

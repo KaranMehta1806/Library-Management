@@ -33,7 +33,7 @@ export default function BooksBorrowed() {
         }
       });
   
-      // If successful
+      
       alert(response.data.message || "Book issued successfully!");
       fetchRequests();
     } catch (err) {
@@ -41,7 +41,7 @@ export default function BooksBorrowed() {
         const message = err.response.data?.error || "Something went wrong";
         alert( message);
       } else {
-        // Other errors like network issues
+       
         alert("Network error: " + err.message);
       }
       console.error("Error approving request:", err);
@@ -64,7 +64,7 @@ export default function BooksBorrowed() {
                 <th>Book Title</th>
                 <th>Issue Date</th>
                 <th>Due Date</th>
-                {/* <th>Fine</th> */}
+              
                 <th>Status</th>
               </tr>
             </thead>
@@ -75,7 +75,7 @@ export default function BooksBorrowed() {
                   <td>{req.bookId?.title || "N/A"}</td>
                   <td>{new Date(req.issueDate).toLocaleDateString()}</td>
                   <td>{new Date(req.dueDate).toLocaleDateString()}</td>
-                  {/* <td>₹{req.fineAmount}</td> */}
+                 
                   <td><span className="badge bg-warning">{req.status}</span></td>
                 </tr>
               ))}

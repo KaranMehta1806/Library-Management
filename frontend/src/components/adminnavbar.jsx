@@ -18,12 +18,12 @@ export default function AdminNavbar(){
     return(
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow">
     <div className="container">
-      {/* Logo */}
+     
       <Link className="navbar-brand fw-bold" to="/admin">
         📚 AGC Library
       </Link>
 
-      {/* Mobile Toggle Button */}
+    
       <button
         className="navbar-toggler"
         type="button"
@@ -76,7 +76,7 @@ export default function AdminNavbar(){
           </li> :null}
         </ul>
 
-        {/* Right Section */}
+       
         <ul className="navbar-nav">
           {token ? (
             

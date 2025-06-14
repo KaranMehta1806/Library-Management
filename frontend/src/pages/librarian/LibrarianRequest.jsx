@@ -35,7 +35,7 @@ export default function LibrarianRequests() {
         }
       });
   
-      // If successful
+      
       showSuccessToast(response.data.message || "Book issued successfully!");
       fetchRequests();
     } catch (err) {
@@ -43,7 +43,7 @@ export default function LibrarianRequests() {
         const message = err.response.data?.error || "Something went wrong";
         showErrorToast( message);
       } else {
-        // Other errors like network issues
+        
         showErrorToast("Network error: " + err.message);
       }
       console.error("Error approving request:", err);

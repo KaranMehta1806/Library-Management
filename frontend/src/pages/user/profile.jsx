@@ -8,7 +8,6 @@ import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
 function ProfilePage() {
   const [user, setUser] = useState([]);
   const [issuedBooks, setIssuedBooks] = useState([]);
-  // const authToken = localStorage.getItem("authToken");
 
   const fetchIssuedBooks = async () => {
     try {
@@ -53,7 +52,6 @@ function ProfilePage() {
       );
       showSuccessToast(response.data.message);
       fetchIssuedBooks();
-    //   setIssuedBooks(issuedBooks.filter((book) => book._id !== borrowId));
     } catch (error) {
       console.error("Error returning book:", error);
       showErrorToast(error.response?.data?.message || "Something went wrong!");

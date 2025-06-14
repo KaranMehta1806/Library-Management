@@ -1,43 +1,10 @@
-/* 
-.sidebar {
-    height: 100vh;
-    position: fixed;
-  }
-  
-  .nav-link {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    text-align: left;
-    border-radius: 5px;
-  }
-  
-  .nav-link:hover {
-    background-color: #495057;
-  }
-  
-  .card {
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .progress {
-    height: 20px;
-    border-radius: 5px;
-  }
-   */
-
-   /* Admin Dashboard Styles */
 .admin-dashboard {
   font-family: 'Poppins', 'Segoe UI', sans-serif;
   background-color: #f8fafc;
   min-height: 100vh;
 }
 
-/* Sidebar Styles */
+
 .admin-sidebar {
   background: linear-gradient(180deg, #2c3e50 0%, #1a2530 100%);
   color: white;
@@ -112,7 +79,7 @@
   box-shadow: inset 3px 0 0 #3498db;
 }
 
-/* Main Content Styles */
+
 .admin-main {
   padding: 2rem;
   background-color: #f8fafc;
@@ -191,7 +158,7 @@
   margin: 0;
 }
 
-/* Progress Cards */
+
 .progress-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -232,7 +199,7 @@
   font-weight: 600;
 }
 
-/* Charts and Activities */
+
 .chart-activity-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -254,7 +221,7 @@
   margin-bottom: 1.5rem;
 }
 
-/* Tables */
+
 .admin-table-container {
   background-color: white;
   border-radius: 12px;
@@ -293,7 +260,7 @@
   background-color: #f8fafc;
 }
 
-/* Responsive Styles */
+
 @media (max-width: 992px) {
   .admin-sidebar {
     min-height: auto;

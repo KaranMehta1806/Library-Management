@@ -13,7 +13,6 @@ const userAuth = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token,JWT_SECRET);
-    // console.log("Decoded Token:", decoded);
     req.userInfo = decoded; 
     next(); 
   } catch (error) {

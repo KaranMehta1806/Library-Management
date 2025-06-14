@@ -37,10 +37,7 @@ export default function AddLibrarian() {
       console.error("Error:", error.response?.data || error.message);
       showErrorToast("Registration Failed!");
     }
-    // Set default role to "user"
-
-    // console.log("Form Data:", formData);
-    // Send formData to the backend API
+   
   };
   return (
     <div className="container mt-4">
@@ -49,7 +46,7 @@ export default function AddLibrarian() {
         onSubmit={handleSubmit(onSubmit)}
         className="p-4 border rounded shadow"
       >
-        {/* Name */}
+    
         <div className="mb-3">
           <label className="form-label">Name</label>
           <input
@@ -60,7 +57,7 @@ export default function AddLibrarian() {
           {errors.name && <p className="text-danger">{errors.name.message}</p>}
         </div>
 
-        {/* Email */}
+        
         <div className="mb-3">
           <label className="form-label">Email</label>
           <input
@@ -73,7 +70,7 @@ export default function AddLibrarian() {
           )}
         </div>
 
-        {/* Password */}
+     
         <div className="mb-3">
           <label className="form-label">Password</label>
           <input
@@ -86,21 +83,9 @@ export default function AddLibrarian() {
           )}
         </div>
 
-        {/* Stream */}
-        {/* <div className="mb-3">
-            <label className="form-label">Stream</label>
-            <input type="text" className="form-control" {...register("stream", { required: "Stream is required" })} />
-            {errors.stream && <p className="text-danger">{errors.stream.message}</p>}
-          </div> */}
 
-        {/* Year */}
-        {/* <div className="mb-3">
-            <label className="form-label">Year</label>
-            <input type="number" className="form-control" {...register("year", { required: "Year is required" })} />
-            {errors.year && <p className="text-danger">{errors.year.message}</p>}
-          </div> */}
 
-        {/* Submit Button */}
+       
         <button type="submit" className="btn btn-primary w-100">
           Add
         </button>

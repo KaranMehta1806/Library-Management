@@ -1,4 +1,4 @@
-/* About Page Styles */
+
 .about-page {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
@@ -12,7 +12,7 @@
   padding: 0 15px;
 }
 
-/* Hero Section */
+
 .about-hero-section {
   background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), 
               url('/assets/library.avif') center/cover no-repeat;
@@ -35,7 +35,7 @@
   opacity: 0.9;
 }
 
-/* Mission Section */
+
 .about-mission-section {
   padding: 80px 0;
   background-color: #f9f9f9;
@@ -76,7 +76,7 @@
   display: block;
 }
 
-/* History Section */
+
 .about-history-section {
   padding: 80px 0;
   background-color: white;
@@ -145,7 +145,7 @@
   margin-bottom: 0;
 }
 
-/* Stats Section */
+
 .about-stats-section {
   padding: 80px 0;
   background-color: #2c3e50;
@@ -191,7 +191,7 @@
   margin-bottom: 0;
 }
 
-/* Team Section */
+
 .about-team-section {
   padding: 80px 0;
   background-color: white;
@@ -244,7 +244,7 @@
   margin-bottom: 0;
 }
 
-/* Facilities Section */
+
 .about-facilities-section {
   padding: 80px 0;
   background-color: #f9f9f9;
@@ -286,7 +286,7 @@
   margin-bottom: 0;
 }
 
-/* CTA Section */
+
 .about-cta-section {
   padding: 80px 0;
   background-color: #3498db;
@@ -347,7 +347,7 @@
   margin-right: 8px;
 }
 
-/* Responsive Adjustments */
+
 @media (max-width: 768px) {
   .about-mission-content {
       flex-direction: column;

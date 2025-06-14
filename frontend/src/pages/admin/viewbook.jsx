@@ -50,7 +50,7 @@ const ViewBooks = () => {
     }
   };
 
-  // ✅ Open the edit modal and load the book details
+  
   const handleEdit = (book) => {
     setSelectedBook(book);
     setFormData({
@@ -63,16 +63,15 @@ const ViewBooks = () => {
     });
     setShowModal(true);
   };
-  
-  // ✅ Handle form changes
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   
-  // ✅ Update book details (Without changing the photo)
+ 
   const handleUpdate = async () => {
     try {
-      // Only send text-based data (title, author, etc.)
+      
       await axios.put(`${Server_URL}books/update/${selectedBook._id}`, formData, {
         headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` },
       });
@@ -133,7 +132,7 @@ const ViewBooks = () => {
 
 
 
-      {/* ✅ Edit Modal */}
+   
       {showModal && selectedBook && (
   <div className="modal d-block" tabIndex="-1">
     <div className="modal-dialog modal-dialog-centered modal-lg"> {/* Centered and Larger Modal */}
