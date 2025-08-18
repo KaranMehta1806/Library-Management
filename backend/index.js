@@ -7,6 +7,7 @@ const users = require("./routes/user.js")
 const books = require("./routes/books.js")
 const admin = require("./routes/admin.js")
 const librarian = require("./routes/librarian.js")
+const home = require("./routes/home.js")
 
 const allowedOrigins = [
   "http://localhost:5173",
@@ -28,6 +29,7 @@ app.use("/users",users);
 app.use("/books",books);
 app.use("/admin",admin);
 app.use("/librarian",librarian);
+app.use("/home",home);
 
 app.get("/", (req, res) => {
     res.send("API is running...");

@@ -17,44 +17,62 @@ export default function Home() {
   const [categoryCount , setCategoryCount] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
-    try {
+  // const fetchData = async () => {
+  //   try {
 
-      setLoading(true);
-      const categoriesResponse = await axios.get(Server_URL + 'books');
-      if (categoriesResponse.data.error) {
-        alert(categoriesResponse.data.message);
-      } else {
-        console.log("category")
-        console.log(categoriesResponse.data.books)
-        const {books} = categoriesResponse.data;
+  //     setLoading(true);
+  //     const categoriesResponse = await axios.get(Server_URL + 'books');
+  //     if (categoriesResponse.data.error) {
+  //       alert(categoriesResponse.data.message);
+  //     } else {
+  //       console.log("category")
+  //       console.log(categoriesResponse.data.books)
+  //       const {books} = categoriesResponse.data;
 
-        const categoryCountMap = {};
-      books.forEach((book) => {
-        const cat = book.category;
-        categoryCountMap[cat] = (categoryCountMap[cat] || 0) + 1;
-      });
+  //       const categoryCountMap = {};
+  //     books.forEach((book) => {
+  //       const cat = book.category;
+  //       categoryCountMap[cat] = (categoryCountMap[cat] || 0) + 1;
+  //     });
 
-      setCategoryCount(categoryCountMap);
+  //     setCategoryCount(categoryCountMap);
 
-        setCategories(books);
-      }
+  //       setCategories(books);
+  //     }
 
       
-      const arrivalsResponse = await axios.get(Server_URL + 'books/new');
-      console.log(arrivalsResponse);
-      if (!arrivalsResponse.data.error) {
-        setNewArrivals(arrivalsResponse.data.books);
-        setStats(arrivalsResponse.data);
-      }
+  //     const arrivalsResponse = await axios.get(Server_URL + 'books/new');
+  //     console.log(arrivalsResponse);
+  //     if (!arrivalsResponse.data.error) {
+  //       setNewArrivals(arrivalsResponse.data.books);
+  //       setStats(arrivalsResponse.data);
+  //     }
 
-    } catch (error) {
-      console.error("Error fetching data:", error);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  //    finally {
+  //     setLoading(false);
+  //   }
+  // };
+
+
+  const fetchData = async () => {
+  try {
+    setLoading(true);
+    const response = await axios.get(Server_URL + "home");
+    
+    if (!response.data.error) {
+      setStats(response.data.stats);
+      setCategories(response.data.categories);
+      setNewArrivals(response.data.newArrivals);
     }
-     finally {
-      setLoading(false);
-    }
-  };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchData();
@@ -76,7 +94,7 @@ export default function Home() {
           <div className="hero-buttons">
             <Link to="/books" className="btn btn-primary">
             <FiBook size={18} className="mr-2" />
-              Browse collections
+              Browse collections 
             </Link>
           
           </div>
