@@ -10,10 +10,16 @@ homeController.getHomeData =  async (req, res) => {
     // 1. Total Books & Categories
     const totalBooks = await BookModel.countDocuments();
     const categories = await BookModel.aggregate([
-      { $group: { _id: "$category", count: { $sum: 1 } } },
+      { $group: { _id: "$category", count: { $sum: 1 }, coverImage: { $first: "$coverImage" } } },
       { $sort: { count: -1 } },
       { $limit: 4 } // only top 4 categories
-    ]);
+    ]).then(data =>
+  data.map(item => ({
+    category: item._id,
+    count: item.count,
+    coverImage: item.coverImage || "/images/default-subject.jpg"
+  }))
+);
 
     const totalCategories = await BookModel.distinct("category").then(c => c.length);
 

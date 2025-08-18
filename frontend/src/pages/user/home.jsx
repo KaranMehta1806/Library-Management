@@ -14,7 +14,6 @@ export default function Home() {
     availableBooks: 0,
     students: 0
   });
-  const [categoryCount , setCategoryCount] = useState({});
   const [loading, setLoading] = useState(true);
 
   // const fetchData = async () => {
@@ -131,24 +130,26 @@ export default function Home() {
           <p className="section-subtitle">Find resources for your courses</p>
           
           <div className="categories-grid">
-            {categories.slice(0, 4).map((book, index) => (
-              <div key={index} className="category-card">
-                <div className="category-img-container">
-                  <img 
-                    src={book.coverImage || "/images/default-subject.jpg"} 
-                    alt={book.category} 
-                  />
-                </div>
-                <div className="category-info">
-                  <h3>{book.category}</h3>
-                  <p>Books :  {categoryCount[book.category] || 0}</p>
-                  <Link to={`/books?category=${book.category}`} className="btn btn-outline">
-                    View Collection
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
+  {categories.map((cat, index) => (
+    <div key={index} className="category-card">
+      <div className="category-img-container">
+        <img 
+          src={cat.coverImage || "/images/default-subject.jpg"} 
+          alt={cat.category} 
+          loading="lazy"
+        />
+      </div>
+      <div className="category-info">
+        <h3>{cat.category}</h3>
+        <p>Books: {cat.count}</p>
+        <Link to={`/books?category=${cat.category}`} className="btn btn-outline">
+          View Collection
+        </Link>
+      </div>
+    </div>
+  ))}
+</div>
+
           
           <div className="text-center">
             <Link to="/category" className="btn btn-view-all">
@@ -165,13 +166,14 @@ export default function Home() {
     <p className="na-subheading">Recently added to our collection</p>
     
     <div className="na-grid-container">  
-      {newArrivals.slice(0, 4).map((book, index) => (
+      {newArrivals.map((book, index) => (
         <div key={index} className="na-book-item">
           <div className="na-cover-wrapper">
             <img 
               src={book.coverImage || "/images/default-book.jpg"} 
               alt={book.title} 
               className="na-cover-image"
+              loading="lazy"
             />
           </div>
           <div className="na-book-info">
