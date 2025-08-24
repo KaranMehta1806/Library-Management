@@ -1,42 +1,47 @@
 const homeController = {};
 const { BookModel } = require("../model/BookModel");
-const {BorrowModel} = require("../model/BorrowModel")
-// const cloudinary = require("cloudinary").v2;
-// const calculateFine = require("../utils/fineCalculator")
+const { BorrowModel } = require("../model/BorrowModel");
+const { setCache, getCache } = require("../utils/cache");
 
-
-homeController.getHomeData =  async (req, res) => {
+homeController.getHomeData = async (req, res) => {
   try {
-    // 1. Total Books & Categories
+    // 1️⃣ Check cache first
+    const cachedData = getCache("homeData");
+    if (cachedData) {
+      return res.status(200).json({
+        error: false,
+        message: "Homepage data fetched from cache",
+        ...cachedData
+      });
+    }
+
+    // 2️⃣ If not cached, fetch fresh data
     const totalBooks = await BookModel.countDocuments();
     const categories = await BookModel.aggregate([
       { $group: { _id: "$category", count: { $sum: 1 }, coverImage: { $first: "$coverImage" } } },
       { $sort: { count: -1 } },
-      { $limit: 4 } // only top 4 categories
+      { $limit: 4 }
     ]).then(data =>
-  data.map(item => ({
-    category: item._id,
-    count: item.count,
-    coverImage: item.coverImage || "/images/default-subject.jpg"
-  }))
-);
+      data.map(item => ({
+        category: item._id,
+        count: item.count,
+        // coverImage: item.coverImage || "/images/default-subject.jpg"
+        coverImage: item.coverImage
+      }))
+    );
 
     const totalCategories = await BookModel.distinct("category").then(c => c.length);
 
-    // 2. Latest 4 books (no need to populate addedBy for homepage speed)
     const newArrivals = await BookModel.find()
       .sort({ createdAt: -1 })
       .limit(4)
       .select("title author category coverImage");
 
-    // 3. Active Students (unique)
     const issuedBooks = await BorrowModel.find({ status: "Issued" }).select("userId");
     const activeStudents = new Set(issuedBooks.map(issue => issue.userId.toString()));
     const totalActiveStudents = activeStudents.size;
 
-    res.status(200).json({
-      error: false,
-      message: "Homepage data fetched successfully",
+    const responseData = {
       stats: {
         totalBooks,
         totalCategories,
@@ -44,6 +49,15 @@ homeController.getHomeData =  async (req, res) => {
       },
       categories,
       newArrivals
+    };
+
+    // 3️⃣ Store in cache
+    setCache("homeData", responseData);
+
+    res.status(200).json({
+      error: false,
+      message: "Homepage data fetched successfully",
+      ...responseData
     });
   } catch (error) {
     res.status(500).json({
@@ -54,7 +68,4 @@ homeController.getHomeData =  async (req, res) => {
   }
 };
 
-
 module.exports = { homeController };
-
-// status:"Issued"
