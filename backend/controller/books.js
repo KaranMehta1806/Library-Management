@@ -3,6 +3,8 @@ const { BookModel } = require("../model/BookModel");
 const {BorrowModel} = require("../model/BorrowModel")
 const cloudinary = require("cloudinary").v2;
 const calculateFine = require("../utils/fineCalculator")
+const { clearCache } = require("../utils/cache");
+
 
 booksController.addNewBook = async (req, res) => {
   try {
@@ -48,6 +50,7 @@ booksController.addNewBook = async (req, res) => {
     });
 
     await newBook.save();
+    clearCache("homeData");
     res.status(201).json({error:false , message: "Book added successfully", book: newBook });
   } catch (error) {
     console.log(error);
@@ -168,6 +171,7 @@ booksController.updateBook = async (req, res) => {
     if (!bookUpdate) {
       return res.status(404).json({ message: "Book not found" });
     }
+    clearCache("homeData");
     res
       .status(200)
       .json({ message: "Book updated successfully", book: bookUpdate });
@@ -184,6 +188,7 @@ booksController.deleteBook = async (req, res) => {
       await cloudinary.uploader.destroy(book.cloudinaryId);
     }
     await BookModel.findByIdAndDelete(req.params.id);
+    clearCache("homeData");
     res.status(200).json({ message: "Book Deleted Successfully" });
   } catch (error) {
     // console.log(deletedBook)

@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const { BorrowModel } = require("../model/BorrowModel");
 const { BookModel } = require("../model/BookModel");
 const calculateFine = require("../utils/fineCalculator");
+const { clearCache } = require("../utils/cache");
 const librarianController = {};
 
 librarianController.bookIssued = async (req, res) => {
@@ -72,7 +73,7 @@ librarianController.approveRequest = async (req, res) => {
     borrowRequest.status = "Issued";
     borrowRequest.approvedBy = req.userInfo.id;
     await borrowRequest.save();
-
+    clearCache("homeData");
     res.json({ message: "Book issued successfully", borrow: borrowRequest });
   } catch (err) {
     console.error("Error approving request", err);
@@ -129,7 +130,7 @@ librarianController.approveReturnRequest = async (req, res) => {
     borrow.approvedBy = req.userInfo.id;
 
     await borrow.save();
-
+    clearCache("homeData");
     res
       .status(200)
       .json({ message: "Book return approved and updated successfully" });

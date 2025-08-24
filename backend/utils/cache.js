@@ -1,6 +1,6 @@
 // utils/cache.js
 const cache = {};
-const ttl = 60 * 1000; // 1 minute
+const ttl = 10 * 60 * 1000; // 1 minute
 
 function setCache(key, data) {
   cache[key] = {
@@ -19,4 +19,8 @@ function getCache(key) {
   return entry.data;
 }
 
-module.exports = { setCache, getCache };
+function clearCache(key) {
+  delete cache[key];
+}
+
+module.exports = { setCache, getCache,clearCache };

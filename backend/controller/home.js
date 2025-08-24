@@ -5,7 +5,7 @@ const { setCache, getCache } = require("../utils/cache");
 
 homeController.getHomeData = async (req, res) => {
   try {
-    // 1️⃣ Check cache first
+  
     const cachedData = getCache("homeData");
     if (cachedData) {
       return res.status(200).json({
@@ -15,7 +15,7 @@ homeController.getHomeData = async (req, res) => {
       });
     }
 
-    // 2️⃣ If not cached, fetch fresh data
+
     const totalBooks = await BookModel.countDocuments();
     const categories = await BookModel.aggregate([
       { $group: { _id: "$category", count: { $sum: 1 }, coverImage: { $first: "$coverImage" } } },
@@ -51,7 +51,7 @@ homeController.getHomeData = async (req, res) => {
       newArrivals
     };
 
-    // 3️⃣ Store in cache
+    
     setCache("homeData", responseData);
 
     res.status(200).json({
