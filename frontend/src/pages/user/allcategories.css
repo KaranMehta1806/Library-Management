@@ -1,32 +1,88 @@
-/* Inherit styles from books.css by using the same class names */
-/* We only need to add specific overrides if necessary */
-
-.books-container {
-  min-height: 100vh;
-  background-color: #f8f9fa;
+.all-categories-container {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-/* Ensure the grid layout matches books.css */
-.books-grid {
+.all-categories-row {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.all-categories-sidebar {
+  width: 220px;
+  border-right: 2px solid #eee;
+  padding-right: 20px;
+}
+
+.all-categories-nav {
+  list-style: none;
+  padding: 0;
+}
+
+.all-categories-nav-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background: #f8f9fa;
+  transition: background 0.3s;
+}
+
+.all-categories-nav-item:hover {
+  background: #e9ecef;
+}
+
+.all-categories-nav-item.active {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.all-categories-main {
+  flex: 1;
+}
+
+.all-categories-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 25px;
-  padding: 10px;
+  gap: 20px;
 }
 
-/* Ensure card images fit well */
-.card-image {
+.all-categories-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  background: white;
+  transition: transform 0.3s;
+}
+
+.all-categories-card:hover {
+  transform: translateY(-5px);
+}
+
+.all-categories-card-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* Changed to cover for category images to look better */
-  transition: transform 0.3s ease;
+  height: 280px;
+  object-fit: cover;
 }
 
-/* Sidebar active state color match */
-.category-item.active {
+.all-categories-card-body {
+  padding: 15px;
+}
+
+.all-categories-card-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.all-categories-btn {
   background-color: #0d6efd;
-  color: #ffffff;
-  font-weight: 600;
-  box-shadow: none;
+  color: white;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 10px;
 }
-
