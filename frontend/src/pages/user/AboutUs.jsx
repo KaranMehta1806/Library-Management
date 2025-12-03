@@ -133,10 +133,10 @@ const AboutUs = () => {
           <h2 className="about-cta-title">Experience Our Library</h2>
           <p className="about-cta-subtitle">Visit us today and discover all the resources we have to offer</p>
           <div className="about-cta-buttons">
-            <Link to="/visit" className="about-btn about-btn-primary">
+            <Link to="/about" className="about-btn about-btn-primary">
               <FiMapPin className="about-icon" /> Visit Us
             </Link>
-            <Link to="/services" className="about-btn about-btn-secondary">
+            <Link to="/about" className="about-btn about-btn-secondary">
               Our Services
             </Link>
           </div>
