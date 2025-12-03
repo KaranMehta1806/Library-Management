@@ -58,54 +58,57 @@ export default function ViewAllCategories() {
   }, []);
 
   return (
-    <div className="all-categories-container">
-      <div className="all-categories-row">
+    <div className="container-fluid books-container">
+      <div className="row">
         {/* Sidebar */}
-        <nav className="all-categories-sidebar">
-          <h5 className="all-categories-sidebar-title">Categories</h5>
-          <ul className="all-categories-nav">
-            <li
-              className={`all-categories-nav-item ${
+        <div className="col-md-3 p-4 sidebar">
+          <h4 className="text-center mb-4">📚 Categories</h4>
+          <div className="category-scroll">
+            <div
+              className={`category-item ${
                 activeCategory === "All" ? "active" : ""
               }`}
               onClick={() => handleCategoryClick("All")}
             >
               All
-            </li>
+            </div>
             {[...new Set(books.map((book) => book.category))].map(
               (category, index) => (
-                <li
+                <div
                   key={index}
-                  className={`all-categories-nav-item ${
+                  className={`category-item ${
                     activeCategory === category ? "active" : ""
                   }`}
                   onClick={() => handleCategoryClick(category)}
                 >
                   {category}
-                </li>
+                </div>
               )
             )}
-          </ul>
-        </nav>
+          </div>
+        </div>
 
         {/* Main Content */}
-        <main className="all-categories-main">
-          <h2 className="all-categories-main-title">Explore All Categories</h2>
+        <div className="col-md-9 main-content">
+          <div className="search-header p-3">
+            <h2 className="page-title">Explore All Categories</h2>
+          </div>
+
           {loading ? (
             <Loader />
           ) : filterBooks.length > 0 ? (
-            <div className="all-categories-grid">
+            <div className="books-grid">
               {[...new Set(filterBooks.map((book) => book.category))].map(
                 (category, index) => (
-                  <div key={index} className="all-categories-card-wrapper">
-                    <div className="all-categories-card shadow-sm">
+                  <div key={index} className="book-card">
+                    <div className="card-image-container">
                       <img
                         src={
                           filterBooks.find(
                             (b) => b.category === category
                           )?.coverImage
                         }
-                        className="all-categories-card-img"
+                        className="card-image"
                         alt={category}
                         onError={(e) => {
                           e.target.onerror = null;
@@ -113,14 +116,12 @@ export default function ViewAllCategories() {
                             "https://via.placeholder.com/300x400?text=No+Image";
                         }}
                       />
-                      <div className="all-categories-card-body">
-                        <h5 className="all-categories-card-title">
-                          {category}
-                        </h5>
-                        <p className="text-muted">
-                          Books: {categoryCounts[category] || 0}
-                        </p>
-                        <Link to="/books" className="all-categories-btn">
+                      <div className="book-badge">{categoryCounts[category] || 0} Books</div>
+                    </div>
+                    <div className="card-body">
+                      <h5 className="card-title">{category}</h5>
+                      <div className="card-footer">
+                        <Link to="/books" className="btn btn-primary btn-sm w-100">
                           Explore
                         </Link>
                       </div>
@@ -130,11 +131,13 @@ export default function ViewAllCategories() {
               )}
             </div>
           ) : (
-            <div className="all-categories-empty">
-              <p>No books found in this category.</p>
+            <div className="no-books-found">
+              <i className="bi bi-book-slash"></i>
+              <h4>No books found!</h4>
+              <p>Try adjusting your category filter</p>
             </div>
           )}
-        </main>
+        </div>
       </div>
     </div>
   );

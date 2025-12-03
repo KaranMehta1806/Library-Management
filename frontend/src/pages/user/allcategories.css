@@ -1,230 +1,32 @@
-.all-categories-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+/* Inherit styles from books.css by using the same class names */
+/* We only need to add specific overrides if necessary */
 
-.all-categories-row {
-  display: flex;
-  gap: 40px;
-  position: relative;
-}
-
-/* Sidebar Styling */
-.all-categories-sidebar {
-  width: 280px;
-  flex-shrink: 0;
-  background: white;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-  height: fit-content;
-  position: sticky;
-  top: 20px;
-}
-
-.all-categories-sidebar-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #2d3436;
-  margin-bottom: 25px;
-  padding-bottom: 15px;
-  border-bottom: 2px solid #f1f2f6;
-}
-
-.all-categories-nav {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.all-categories-nav-item {
-  padding: 12px 18px;
-  cursor: pointer;
-  border-radius: 10px;
-  font-weight: 500;
-  color: #636e72;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.all-categories-nav-item:hover {
+.books-container {
+  min-height: 100vh;
   background-color: #f8f9fa;
-  color: #0984e3;
-  transform: translateX(5px);
 }
 
-.all-categories-nav-item.active {
-  background: linear-gradient(135deg, #0984e3 0%, #74b9ff 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(9, 132, 227, 0.3);
-}
-
-/* Main Content Styling */
-.all-categories-main {
-  flex: 1;
-}
-
-.all-categories-main-title {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #2d3436;
-  margin-bottom: 30px;
-  position: relative;
-  display: inline-block;
-}
-
-.all-categories-main-title::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 60px;
-  height: 4px;
-  background: #0984e3;
-  border-radius: 2px;
-}
-
-.all-categories-grid {
+/* Ensure the grid layout matches books.css */
+.books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+  padding: 10px;
 }
 
-/* Card Styling */
-.all-categories-card-wrapper {
-  height: 100%;
-}
-
-.all-categories-card {
-  background: white;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid rgba(0,0,0,0.05);
-}
-
-.all-categories-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-}
-
-.all-categories-card-img {
+/* Ensure card images fit well */
+.card-image {
   width: 100%;
-  height: 220px;
-  object-fit: cover;
-  transition: transform 0.5s ease;
+  height: 100%;
+  object-fit: cover; /* Changed to cover for category images to look better */
+  transition: transform 0.3s ease;
 }
 
-.all-categories-card:hover .all-categories-card-img {
-  transform: scale(1.05);
-}
-
-.all-categories-card-body {
-  padding: 25px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background: white;
-  position: relative;
-  z-index: 1;
-}
-
-.all-categories-card-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #2d3436;
-  margin-bottom: 10px;
-}
-
-.text-muted {
-  color: #636e72;
-  font-size: 0.95rem;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.text-muted::before {
-  content: '📚';
-  font-size: 1rem;
-}
-
-.all-categories-btn {
-  margin-top: auto;
-  background: white;
-  color: #0984e3;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 8px;
+/* Sidebar active state color match */
+.category-item.active {
+  background-color: #0d6efd;
+  color: #ffffff;
   font-weight: 600;
-  text-align: center;
-  border: 2px solid #0984e3;
-  transition: all 0.2s ease;
+  box-shadow: none;
 }
 
-.all-categories-btn:hover {
-  background: #0984e3;
-  color: white;
-}
-
-/* Empty State */
-.all-categories-empty {
-  text-align: center;
-  padding: 60px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-}
-
-.all-categories-empty p {
-  font-size: 1.2rem;
-  color: #636e72;
-}
-
-/* Responsive Design */
-@media (max-width: 992px) {
-  .all-categories-row {
-    flex-direction: column;
-  }
-
-  .all-categories-sidebar {
-    width: 100%;
-    position: static;
-    overflow-x: auto;
-  }
-
-  .all-categories-nav {
-    flex-direction: row;
-    padding-bottom: 5px;
-  }
-
-  .all-categories-nav-item {
-    white-space: nowrap;
-  }
-}
-
-@media (max-width: 576px) {
-  .all-categories-container {
-    padding: 20px 15px;
-  }
-
-  .all-categories-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .all-categories-main-title {
-    font-size: 1.75rem;
-  }
-}
