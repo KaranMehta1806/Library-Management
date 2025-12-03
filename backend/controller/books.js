@@ -256,14 +256,14 @@ booksController.reqIssueBook = async (req, res) => {
       return res.status(400).json({ error: true, message: "No available copies to issue" });
     }
 
-    // Check if user already has 4 issued/requested books
+    // Check if user already has 4 books that are either issued, requested, or requested for return
     const currentCount = await BorrowModel.countDocuments({
       userId: userid,
-      status: { $in: ["Requested", "Issued"] }
+      status: { $in: ["Requested", "Issued", "Requested Return"] }
     });
 
     if (currentCount >= 4) {
-      return res.status(400).json({ error: true, message: "You cannot request or issue more than 4 books at a time." });
+      return res.status(400).json({ error: true, message: "You cannot request or issue more than 4 books at a time, including books pending return approval." });
     }
 
     // Check if this specific book is already requested/issued by the user
