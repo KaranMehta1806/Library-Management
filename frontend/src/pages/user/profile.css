@@ -1,80 +1,214 @@
 .profile-page {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .profile-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
-.profile-info {
-    margin-bottom: 20px;
+/* Profile Info Card */
+.profile-info.card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.profile-img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
+.profile-info h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
 
-.issued-books {
-    width: 100%;
-    margin-top: 20px;
+.profile-info p {
+  margin: 5px 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
 }
 
-.issued-books h2 {
-    text-align: center;
-    margin-bottom: 10px;
+/* Sections Container */
+.profile-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
+/* Section Cards */
+.section-card {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.section-card:hover {
+  transform: translateY(-2px);
+}
+
+.section-card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Tables */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-th, td {
-    padding: 10px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 10px;
 }
 
 th {
-    background: #f4f4f4;
+  background-color: #f8f9fa;
+  color: #666;
+  font-weight: 600;
+  padding: 15px;
+  text-align: left;
+  border-bottom: 2px solid #eee;
 }
 
-.returned {
-    color: green;
+td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  color: #444;
+  vertical-align: middle;
 }
 
-.issued {
-    color: red;
+tr:last-child td {
+  border-bottom: none;
 }
 
+tr:hover td {
+  background-color: #fcfcfc;
+}
+
+/* Badges */
+.badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.badge.issued {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.badge.requested {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.badge.return-requested {
+  background-color: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.badge.returned {
+  background-color: #e8f5e9;
+  color: #388e3c;
+}
+
+/* Buttons */
 .return-btn {
-    padding: 6px 12px;
-    background: #ff4d4d;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
+  padding: 8px 16px;
+  background-color: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
 }
 
 .return-btn:hover {
-    background: #cc0000;
+  background-color: #ff6b81;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
-    table, th, td {
-        font-size: 14px;
-    }
+  .profile-page {
+    padding: 10px;
+    margin: 20px auto;
+  }
+
+  .profile-info h1 {
+    font-size: 1.8rem;
+  }
+
+  /* Card View for Mobile Tables */
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 10px;
+    background: #fff;
+  }
+
+  td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    text-align: right;
+    padding: 8px 10px;
+  }
+
+  td:before {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: 600;
+    color: #666;
+  }
+
+  /* Add labels for mobile view */
+  .issued-books td:nth-of-type(1):before { content: "Book Title"; }
+  .issued-books td:nth-of-type(2):before { content: "Issue Date"; }
+  .issued-books td:nth-of-type(3):before { content: "Due Date"; }
+  .issued-books td:nth-of-type(4):before { content: "Status"; }
+  .issued-books td:nth-of-type(5):before { content: "Fine"; }
+  .issued-books td:nth-of-type(6):before { content: "Action"; }
+
+  .issued-requests td:nth-of-type(1):before { content: "Book Title"; }
+  .issued-requests td:nth-of-type(2):before { content: "Request Date"; }
+  .issued-requests td:nth-of-type(3):before { content: "Due Date"; }
+  .issued-requests td:nth-of-type(4):before { content: "Status"; }
+
+  .return-requests td:nth-of-type(1):before { content: "Book Title"; }
+  .return-requests td:nth-of-type(2):before { content: "Request Date"; }
+  .return-requests td:nth-of-type(3):before { content: "Due Date"; }
+  .return-requests td:nth-of-type(4):before { content: "Status"; }
 }
