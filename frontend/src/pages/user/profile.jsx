@@ -7,7 +7,10 @@ import { showErrorToast, showSuccessToast } from "../../utils/toasthelper";
 
 function ProfilePage() {
   const [user, setUser] = useState([]);
+  const [allBooks, setAllBooks] = useState([]);
   const [issuedBooks, setIssuedBooks] = useState([]);
+  const [issuedRequests, setIssuedRequests] = useState([]);
+  const [returnRequests, setReturnRequests] = useState([]);
 
   const fetchIssuedBooks = async () => {
     try {
@@ -15,12 +18,11 @@ function ProfilePage() {
       const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${getAuthToken()}` },
       });
-      if (response.data.issuedBooks.length === 0) {
-        console.log("No issued books found.");
-      }
-     
-      setIssuedBooks(response.data.issuedBooks);
-      console.log("success");
+      const books = response.data.issuedBooks || [];
+      setAllBooks(books);
+      setIssuedBooks(books.filter(b => b.status === "Issued"));
+      setIssuedRequests(books.filter(b => b.status === "Requested"));
+      setReturnRequests(books.filter(b => b.status === "Requested Return"));
     } catch (error) {
       console.error("Error fetching issued books:", error.message);
     }
@@ -63,60 +65,107 @@ function ProfilePage() {
   return (
     <div className="profile-page">
       <div className="profile-container">
-        <div className="profile-info">
-          
+        <div className="profile-info card">
           <h1>{user.name}</h1>
-          <p>
-            <strong>Email:</strong> {user.email}
-          </p>
-          <p>
-            <strong>Role:</strong> {user.role}
-          </p>
+          <p><strong>Email:</strong> {user.email}</p>
+          <p><strong>Role:</strong> {user.role}</p>
         </div>
 
-        <div className="issued-books">
-          <h2>Issued Books</h2>
-          {issuedBooks.length === 0 ? (
-            <p>No books issued yet.</p>
-          ) : (
-            <table>
-              <thead>
-                <tr>
-                  <th>Book Title</th>
-                  <th>Issue Date</th>
-                  <th>Due Date</th>
-                  <th>Status</th>
-                  <th>Fine</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-  {issuedBooks.map((book) => (
-    <tr key={book._id}>
-      <td>{book.bookId.title}</td>
-      <td>{new Date(book.issueDate).toLocaleDateString()}</td>
-      <td>{new Date(book.dueDate).toLocaleDateString()}</td>
-      <td>{book.status}</td>
-      <td>₹{book.fine}</td>
-      <td>
-        {book.status === "Issued" && (
-          <button
-            className="return-btn"
-            onClick={() => returnBook(book._id)}
-          >
-            Return Book
-          </button>
-        )}
-        {book.status === "Returned" && (
-          <span className="text-success">✔ Returned</span>
-        )}
-      </td>
-    </tr>
-  ))}
-</tbody>
+        <div className="profile-sections">
+          <div className="section-card issued-books">
+            <h2>📚 Issued Books</h2>
+            {issuedBooks.length === 0 ? (
+              <p>No books currently issued.</p>
+            ) : (
+              <table>
+                <thead>
+                  <tr>
+                    <th>Book Title</th>
+                    <th>Issue Date</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Fine</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {issuedBooks.map((book) => (
+                    <tr key={book._id}>
+                      <td>{book.bookId.title}</td>
+                      <td>{new Date(book.issueDate).toLocaleDateString()}</td>
+                      <td>{new Date(book.dueDate).toLocaleDateString()}</td>
+                      <td><span className="badge issued">{book.status}</span></td>
+                      <td>₹{book.fine}</td>
+                      <td>
+                        <button
+                          className="return-btn"
+                          onClick={() => returnBook(book._id)}
+                        >
+                          Request Return
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
 
-            </table>
-          )}
+          <div className="section-card issued-requests">
+            <h2>📝 Issued Requests</h2>
+            {issuedRequests.length === 0 ? (
+              <p>No pending issue requests.</p>
+            ) : (
+              <table>
+                <thead>
+                  <tr>
+                    <th>Book Title</th>
+                    <th>Request Date</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {issuedRequests.map((book) => (
+                    <tr key={book._id}>
+                      <td>{book.bookId.title}</td>
+                      <td>{new Date(book.issueDate).toLocaleDateString()}</td>
+                      <td>{new Date(book.dueDate).toLocaleDateString()}</td>
+                      <td><span className="badge requested">{book.status}</span></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+
+          <div className="section-card return-requests">
+            <h2>🔄 Return Requests</h2>
+            {returnRequests.length === 0 ? (
+              <p>No pending return requests.</p>
+            ) : (
+              <table>
+                <thead>
+                  <tr>
+                    <th>Book Title</th>
+                    <th>Request Date</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {returnRequests.map((book) => (
+                    <tr key={book._id}>
+                      <td>{book.bookId.title}</td>
+                      <td>{new Date(book.issueDate).toLocaleDateString()}</td>
+                      <td>{new Date(book.dueDate).toLocaleDateString()}</td>
+                      <td><span className="badge return-requested">{book.status}</span></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
         </div>
       </div>
     </div>

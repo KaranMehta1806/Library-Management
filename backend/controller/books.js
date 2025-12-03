@@ -331,7 +331,7 @@ booksController.getIssuedBooks = async (req, res) => {
     const issuedBooks = await BorrowModel.find({
       userId,
       returnDate: null,
-      status: { $in: ["Issued", "Requested Return"] }
+      status: { $in: ["Issued", "Requested", "Requested Return"] }
     })
       .populate("bookId", "title author category isbn price coverImage")
       .populate("userId", "name email role")
